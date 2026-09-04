@@ -3,119 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pet World 🐾</title>
+<title>Pet World 2.0 🐾</title>
 
 <style>
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+body {
+    background: #111827;
+    color: #fff;
     overflow: hidden;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #7c5cff, #a66cff, #ff75b8);
-    color: #fff;
-}
-
 button {
-    font-family: inherit;
     border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .app {
     width: 100%;
-    height: 100vh;
     max-width: 550px;
+    height: 100vh;
     margin: auto;
+    background: linear-gradient(180deg, #8ee7ff, #d9f8ff);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, #8065ff, #b16cf5);
 }
 
-/* =========================
-   TOPO
-========================= */
+/* ================= TOPBAR ================= */
 
 .topbar {
-    height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 18px;
-    position: relative;
-    z-index: 10;
-}
-
-.player-info {
+    height: 78px;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     gap: 10px;
+    background: rgba(255,255,255,.85);
+    color: #222;
+    box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    position: relative;
+    z-index: 20;
 }
 
-.level-circle {
-    width: 45px;
-    height: 45px;
+.level {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: #fff;
-    color: #7958e8;
+    background: #7c3aed;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-    box-shadow: 0 5px 12px #0002;
+    font-size: 19px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.2);
 }
 
-.player-name {
+.top-info {
+    flex: 1;
+}
+
+.top-name {
+    font-size: 17px;
     font-weight: bold;
-    font-size: 15px;
 }
 
 .xp-bar {
-    width: 110px;
-    height: 7px;
-    background: #ffffff55;
-    border-radius: 10px;
-    margin-top: 5px;
+    height: 9px;
+    background: #ddd;
+    border-radius: 20px;
     overflow: hidden;
+    margin-top: 5px;
 }
 
 .xp-fill {
-    width: 0%;
     height: 100%;
-    background: #ffe45e;
-    border-radius: 10px;
+    width: 0%;
+    background: linear-gradient(90deg,#8b5cf6,#ec4899);
     transition: .3s;
 }
 
 .coins {
-    background: #ffffffdd;
-    color: #6c4fe2;
-    padding: 10px 14px;
+    background: #fff7cc;
+    color: #9a6700;
+    padding: 9px 12px;
     border-radius: 20px;
     font-weight: bold;
-    box-shadow: 0 5px 12px #0002;
 }
 
-/* =========================
-   TELAS
-========================= */
+.gear {
+    background: #eee;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 19px;
+}
+
+/* ================= TELAS ================= */
 
 .screen {
     display: none;
-    width: 100%;
     height: calc(100vh - 145px);
     overflow-y: auto;
-    padding: 5px 18px 30px;
+    padding: 15px;
+    padding-bottom: 20px;
 }
 
 .screen.active {
@@ -127,573 +123,424 @@ button {
 }
 
 .screen::-webkit-scrollbar-thumb {
-    background: #ffffff55;
+    background: #aaa;
     border-radius: 10px;
 }
 
-/* =========================
-   HOME
-========================= */
+/* ================= HOME ================= */
 
-.home-title {
-    text-align: center;
-    font-size: 21px;
-    margin: 4px 0 10px;
-}
-
-.pet-area {
-    min-height: 310px;
+.pet-selector {
     display: flex;
-    align-items: center;
+    gap: 8px;
     justify-content: center;
-    position: relative;
+    margin-bottom: 12px;
 }
 
-.pet-platform {
-    position: absolute;
-    bottom: 28px;
+.pet-selector button {
+    width: 48px;
+    height: 42px;
+    border-radius: 15px;
+    background: white;
+    font-size: 23px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
+}
+
+.pet-selector button.selected {
+    background: #7c3aed;
+    transform: scale(1.08);
+}
+
+.pet-card {
+    background: rgba(255,255,255,.75);
+    border-radius: 28px;
+    padding: 20px;
+    color: #222;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+.pet-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.pet-container {
     width: 220px;
-    height: 65px;
-    background: #ffffff38;
-    border-radius: 50%;
+    height: 220px;
+    margin: 10px auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pet {
-    font-size: 135px;
-    position: relative;
-    z-index: 2;
+    font-size: 125px;
+    z-index: 3;
     user-select: none;
-    filter: drop-shadow(0 10px 5px #0002);
-    transition: .25s;
-    animation: floating 2.5s infinite ease-in-out;
+    animation: petIdle 2.5s infinite ease-in-out;
 }
 
-@keyframes floating {
-    0%,100% {
-        transform: translateY(0);
-    }
+@keyframes petIdle {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ================= ACESSÓRIOS ================= */
+
+.accessory {
+    position: absolute;
+    z-index: 8;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+}
+
+.accessory.equipped {
+    display: block;
+}
+
+.acc-coroa {
+    top: 4px;
+    left: 73px;
+    font-size: 52px;
+    transform: rotate(-8deg);
+}
+
+.acc-chapeu {
+    top: 0;
+    left: 62px;
+    font-size: 58px;
+}
+
+.acc-oculos {
+    top: 91px;
+    left: 77px;
+    font-size: 39px;
+}
+
+.acc-laco {
+    top: 88px;
+    right: 23px;
+    font-size: 42px;
+}
+
+.acc-estrela {
+    top: 23px;
+    right: 13px;
+    font-size: 38px;
+    animation: estrela 1.8s infinite linear;
+}
+
+.acc-joia {
+    bottom: 28px;
+    right: 28px;
+    font-size: 37px;
+}
+
+@keyframes estrela {
     50% {
-        transform: translateY(-10px);
+        transform: rotate(20deg) scale(1.15);
     }
 }
 
-.pet.happy {
-    animation: happy .5s;
+/* ================= STATUS ================= */
+
+.status-area {
+    margin-top: 12px;
 }
 
-@keyframes happy {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.25) rotate(-5deg); }
-    100% { transform: scale(1); }
+.status {
+    margin: 8px 0;
 }
 
-.pet.sad {
-    filter: grayscale(.5) drop-shadow(0 10px 5px #0002);
+.status-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
 }
 
-/* =========================
-   STATUS
-========================= */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 9px;
-    margin-bottom: 13px;
-}
-
-.stat {
-    background: #ffffff22;
-    border-radius: 15px;
-    padding: 9px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-}
-
-.stat-icon {
-    font-size: 19px;
-}
-
-.stat-name {
-    font-size: 11px;
-    margin: 2px 0 5px;
-}
-
-.stat-bar {
-    height: 7px;
-    background: #0002;
-    border-radius: 10px;
+.status-bar {
+    height: 15px;
+    background: #ddd;
+    border-radius: 20px;
     overflow: hidden;
 }
 
-.stat-fill {
+.status-fill {
     height: 100%;
-    width: 100%;
-    border-radius: 10px;
     transition: .4s;
 }
 
 .hunger-fill {
-    background: #ffce4a;
+    background: #f59e0b;
 }
 
 .energy-fill {
-    background: #54e7ff;
+    background: #22c55e;
 }
 
-.happiness-fill {
-    background: #ff76ba;
+.happy-fill {
+    background: #ec4899;
 }
 
-/* =========================
-   AÇÕES RÁPIDAS
-========================= */
+/* ================= BOTÕES ================= */
 
 .quick-actions {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(3,1fr);
+    gap: 9px;
+    margin-top: 15px;
 }
 
-.quick-btn {
-    padding: 11px 5px;
-    border-radius: 15px;
-    background: #ffffffdd;
-    color: #6647d7;
-    font-weight: bold;
-    box-shadow: 0 5px 12px #0002;
-    transition: .15s;
+.action {
+    background: white;
+    border-radius: 18px;
+    padding: 12px 5px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.12);
 }
 
-.quick-btn:hover {
-    transform: translateY(-3px);
-}
-
-.quick-btn:active {
-    transform: scale(.92);
-}
-
-.quick-icon {
+.action span {
     display: block;
-    font-size: 23px;
-    margin-bottom: 3px;
+    font-size: 27px;
+    margin-bottom: 4px;
 }
 
-/* =========================
-   TÍTULOS
-========================= */
+.action:active {
+    transform: scale(.94);
+}
 
-.section-title {
-    font-size: 24px;
+/* ================= TITULOS ================= */
+
+.title {
+    color: #222;
     text-align: center;
-    margin: 12px 0 16px;
+    font-size: 25px;
+    margin-bottom: 15px;
 }
 
 .subtitle {
+    color: #555;
     text-align: center;
-    opacity: .8;
-    font-size: 13px;
-    margin-top: -10px;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
-/* =========================
-   COMIDA
-========================= */
+/* ================= CARDS ================= */
 
-.food-grid {
+.cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 12px;
 }
 
-.food-card {
-    background: #ffffffee;
-    color: #5038b3;
-    padding: 16px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 7px 15px #0002;
-    transition: .2s;
-}
-
-.food-card:hover {
-    transform: translateY(-4px);
-}
-
-.food-icon {
-    font-size: 50px;
-}
-
-.food-name {
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-.food-effect {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 8px;
-}
-
-.food-price {
-    background: #ffe16a;
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.food-card button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 9px;
-    border-radius: 12px;
-    background: #7656e8;
-    color: white;
-    font-weight: bold;
-}
-
-/* =========================
-   JOGOS
-========================= */
-
-.games-grid {
-    display: grid;
-    gap: 13px;
-}
-
-.game-card {
-    background: #ffffffee;
-    color: #5038b3;
-    padding: 18px;
-    border-radius: 20px;
-    box-shadow: 0 7px 15px #0002;
-}
-
-.game-card h3 {
-    margin-bottom: 6px;
-}
-
-.game-card p {
-    font-size: 13px;
-    color: #777;
-    margin-bottom: 12px;
-}
-
-.game-button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 13px;
-    background: #7656e8;
-    color: white;
-    font-weight: bold;
-}
-
-/* =========================
-   MINI GAME
-========================= */
-
-.game-box {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #0009;
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.game-box.active {
-    display: flex;
-}
-
-.game-window {
-    width: 100%;
-    max-width: 430px;
-    background: linear-gradient(180deg, #8065ff, #b16cf5);
-    padding: 25px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 15px 40px #0005;
-}
-
-.game-target {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    background: #ffe35b;
-    font-size: 35px;
-    margin: 25px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.game-score {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.close-game {
-    background: #ffffff33;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 12px;
-}
-
-/* =========================
-   BANHO
-========================= */
-
-.bath-room {
-    background: #ffffff22;
-    border-radius: 25px;
-    padding: 25px 15px;
-    text-align: center;
-}
-
-.bath-pet {
-    font-size: 115px;
-    margin: 20px;
-}
-
-.bath-actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.bath-btn {
-    background: #ffffffee;
-    color: #543cb8;
-    padding: 16px 8px;
-    border-radius: 17px;
-    font-weight: bold;
-    box-shadow: 0 5px 12px #0002;
-}
-
-.bath-btn span {
-    display: block;
-    font-size: 35px;
-    margin-bottom: 5px;
-}
-
-/* =========================
-   LOJA
-========================= */
-
-.shop-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.shop-item {
-    background: #ffffffee;
-    color: #5038b3;
+.card {
+    background: white;
+    color: #222;
     border-radius: 20px;
     padding: 15px;
     text-align: center;
-    box-shadow: 0 7px 15px #0002;
+    box-shadow: 0 4px 10px rgba(0,0,0,.12);
 }
 
-.shop-item-icon {
-    font-size: 55px;
+.card-icon {
+    font-size: 45px;
 }
 
-.shop-item h3 {
-    margin: 5px;
+.card h3 {
+    margin: 5px 0;
 }
 
-.shop-item p {
-    font-size: 12px;
-    color: #777;
+.card p {
+    color: #666;
+    font-size: 13px;
+    min-height: 32px;
 }
 
-.buy-button {
+.card button {
     width: 100%;
     margin-top: 10px;
-    padding: 9px;
-    background: #7656e8;
-    color: white;
+    padding: 10px;
     border-radius: 12px;
+    background: #7c3aed;
+    color: white;
+}
+
+.card button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+/* ================= JOGOS ================= */
+
+.game-card {
+    background: white;
+    color: #222;
+    border-radius: 22px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.12);
+}
+
+.game-button {
+    background: #ec4899;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.click-count {
+    font-size: 40px;
     font-weight: bold;
+    color: #7c3aed;
+    margin: 10px;
 }
 
-.equipped {
-    background: #4dcc8b !important;
+/* ================= BANHO ================= */
+
+.bath-area {
+    background: linear-gradient(#bdefff,#fff);
+    border-radius: 25px;
+    padding: 25px;
+    text-align: center;
+    color: #222;
 }
 
-/* =========================
-   CONQUISTAS
-========================= */
+.bath-pet {
+    font-size: 110px;
+    margin: 10px;
+}
+
+.bath-buttons {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+
+.bath-buttons button {
+    padding: 14px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+
+/* ================= CONQUISTAS ================= */
 
 .achievement {
-    background: #ffffffee;
-    color: #4f39af;
+    background: white;
+    color: #222;
+    padding: 15px;
     border-radius: 18px;
-    padding: 14px;
     margin-bottom: 10px;
     display: flex;
+    gap: 12px;
     align-items: center;
-    gap: 13px;
-    box-shadow: 0 5px 12px #0002;
 }
 
 .achievement.locked {
-    opacity: .5;
+    opacity: .45;
+    filter: grayscale(1);
 }
 
 .achievement-icon {
     font-size: 35px;
 }
 
-.achievement-info {
-    flex: 1;
+.achievement h3 {
+    margin-bottom: 3px;
 }
 
-.achievement-info h3 {
-    font-size: 15px;
+.achievement p {
+    font-size: 13px;
+    color: #666;
 }
 
-.achievement-info p {
-    font-size: 12px;
-    color: #777;
-    margin-top: 3px;
-}
-
-/* =========================
-   CONFIGURAÇÕES
-========================= */
-
-.settings-list {
-    display: grid;
-    gap: 12px;
-}
+/* ================= CONFIGURAÇÕES ================= */
 
 .setting {
-    background: #ffffffee;
-    color: #4f39af;
-    padding: 17px;
-    border-radius: 17px;
+    background: white;
+    color: #222;
+    padding: 15px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+}
+
+.setting input {
+    width: 100%;
+    padding: 11px;
+    margin-top: 8px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.setting button {
+    background: #7c3aed;
+    color: white;
+    padding: 11px 15px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.setting button {
-    background: #7656e8;
-    color: white;
-    padding: 9px 14px;
-    border-radius: 10px;
-    font-weight: bold;
+.toggle button {
+    margin: 0;
 }
 
-.name-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 2px solid #ddd;
-    margin-top: 8px;
-    outline: none;
-}
-
-/* =========================
-   PETS
-========================= */
-
-.pet-selector {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 5px 2px 12px;
-}
-
-.pet-selector::-webkit-scrollbar {
-    display: none;
-}
-
-.pet-option {
-    min-width: 85px;
-    padding: 10px;
-    border-radius: 16px;
-    background: #ffffff44;
-    text-align: center;
-}
-
-.pet-option.active {
-    background: #ffffffdd;
-    color: #543bb8;
-}
-
-.pet-option div {
-    font-size: 38px;
-}
-
-.pet-option small {
-    font-size: 10px;
-}
-
-/* =========================
-   MENU INFERIOR
-========================= */
+/* ================= NAVEGAÇÃO ================= */
 
 .bottom-nav {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    background: #ffffffee;
+    height: 67px;
+    background: rgba(255,255,255,.96);
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    border-radius: 23px 23px 0 0;
-    box-shadow: 0 -5px 20px #0002;
-    z-index: 20;
+    grid-template-columns: repeat(5,1fr);
+    box-shadow: 0 -3px 12px rgba(0,0,0,.15);
+    z-index: 50;
 }
 
-.nav-button {
+.nav-btn {
     background: transparent;
-    color: #8373bd;
-    font-size: 10px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3px;
+    color: #777;
+    font-size: 11px;
 }
 
-.nav-button span {
-    font-size: 24px;
+.nav-btn span {
+    display: block;
+    font-size: 23px;
 }
 
-.nav-button.active {
-    color: #6747db;
-    transform: translateY(-3px);
+.nav-btn.active {
+    color: #7c3aed;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* ================= TOAST ================= */
 
 .toast {
     position: fixed;
     left: 50%;
-    bottom: 85px;
-    transform: translateX(-50%) translateY(20px);
-    background: #ffffffee;
-    color: #5139ae;
+    bottom: 82px;
+    transform: translateX(-50%) translateY(30px);
+    background: #222;
+    color: white;
     padding: 12px 18px;
-    border-radius: 20px;
-    font-weight: bold;
+    border-radius: 30px;
     opacity: 0;
     pointer-events: none;
     transition: .3s;
-    z-index: 200;
+    z-index: 300;
     text-align: center;
     max-width: 90%;
 }
@@ -703,59 +550,189 @@ button {
     transform: translateX(-50%) translateY(0);
 }
 
-/* =========================
-   DARK MODE
-========================= */
+/* ================= SONO ================= */
+
+.sleep-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,30,.96);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.sleep-overlay.active {
+    display: flex;
+}
+
+.sleep-window {
+    width: 90%;
+    max-width: 420px;
+}
+
+.sleep-title {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.sleep-subtitle {
+    color: #b9c1ff;
+    margin-bottom: 20px;
+}
+
+.sleep-pet-container {
+    width: 230px;
+    height: 230px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sleep-pet {
+    font-size: 125px;
+    animation: sleeping 2.5s infinite ease-in-out;
+}
+
+@keyframes sleeping {
+    0%,100% {
+        transform: translateY(5px) rotate(-3deg);
+    }
+    50% {
+        transform: translateY(12px) rotate(3deg);
+    }
+}
+
+.zzz {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 38px;
+    animation: zzz 2s infinite ease-in-out;
+}
+
+@keyframes zzz {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+}
+
+.wake-button {
+    background: #facc15;
+    color: #222;
+    padding: 15px 22px;
+    border-radius: 18px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 180;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    color: #222;
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.modal-box button {
+    margin-top: 12px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #7c3aed;
+    color: white;
+}
+
+/* ================= DARK MODE ================= */
 
 body.dark .app {
-    background: linear-gradient(180deg, #29214c, #493071);
+    background: linear-gradient(180deg,#18213c,#26304f);
 }
 
-body.dark .food-card,
+body.dark .topbar {
+    background: #1f2937;
+    color: white;
+}
+
+body.dark .pet-card {
+    background: rgba(31,41,55,.9);
+    color: white;
+}
+
+body.dark .card,
 body.dark .game-card,
-body.dark .shop-item,
 body.dark .achievement,
-body.dark .setting {
-    background: #29243eee;
-    color: #fff;
+body.dark .setting,
+body.dark .bath-area {
+    background: #1f2937;
+    color: white;
 }
 
-body.dark .food-effect,
-body.dark .game-card p,
-body.dark .shop-item p,
-body.dark .achievement-info p {
+body.dark .card p,
+body.dark .achievement p,
+body.dark .subtitle {
     color: #bbb;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media (max-height: 650px) {
-    .pet-area {
-        min-height: 235px;
-    }
-
-    .pet {
-        font-size: 100px;
-    }
-
-    .pet-platform {
-        bottom: 20px;
-    }
+body.dark .bottom-nav {
+    background: #111827;
 }
 
-@media (max-width: 350px) {
+body.dark .nav-btn {
+    color: #aaa;
+}
+
+body.dark .nav-btn.active {
+    color: #a78bfa;
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media(max-width:380px) {
     .pet {
-        font-size: 100px;
+        font-size: 105px;
     }
 
-    .quick-btn {
-        font-size: 10px;
+    .pet-container {
+        height: 190px;
     }
 
-    .quick-icon {
-        font-size: 20px;
+    .quick-actions {
+        gap: 5px;
+    }
+
+    .action {
+        padding: 9px 3px;
+        font-size: 12px;
     }
 }
 </style>
@@ -765,240 +742,209 @@ body.dark .achievement-info p {
 
 <div class="app">
 
-<!-- =========================
-     TOPO
-========================= -->
+<!-- ================= TOPBAR ================= -->
 
 <header class="topbar">
 
-    <div class="player-info">
+    <div class="level" id="levelDisplay">1</div>
 
-        <div class="level-circle">
-            <span id="level">1</span>
+    <div class="top-info">
+        <div class="top-name" id="topPetName">Gatinho</div>
+
+        <div class="xp-bar">
+            <div class="xp-fill" id="xpFill"></div>
         </div>
-
-        <div>
-            <div class="player-name">
-                <span id="petNameTop">Meu Pet</span>
-            </div>
-
-            <div class="xp-bar">
-                <div class="xp-fill" id="xpFill"></div>
-            </div>
-        </div>
-
     </div>
 
     <div class="coins">
-        🪙 <span id="coins">100</span>
+        🪙 <span id="coinsDisplay">100</span>
     </div>
+
+    <button class="gear" onclick="mostrarTela('settings')">⚙️</button>
 
 </header>
 
 
-<!-- =========================
-     TELA INÍCIO
-========================= -->
+<!-- ================= HOME ================= -->
 
 <section class="screen active" id="homeScreen">
 
-    <h2 class="home-title">
-        <span id="greetingPet">Seu Pet</span> 🐾
-    </h2>
-
     <div class="pet-selector">
 
-        <div class="pet-option active" onclick="escolherPet('🐱','Gatinho',this)">
-            <div>🐱</div>
-            <small>Gato</small>
-        </div>
-
-        <div class="pet-option" onclick="escolherPet('🐶','Cachorrinho',this)">
-            <div>🐶</div>
-            <small>Cachorro</small>
-        </div>
-
-        <div class="pet-option" onclick="escolherPet('🐸','Sapo',this)">
-            <div>🐸</div>
-            <small>Sapo</small>
-        </div>
-
-        <div class="pet-option" onclick="escolherPet('🐙','Polvinho',this)">
-            <div>🐙</div>
-            <small>Polvo</small>
-        </div>
-
-        <div class="pet-option" onclick="escolherPet('🦆','Pato',this)">
-            <div>🦆</div>
-            <small>Pato</small>
-        </div>
+        <button onclick="trocarPet('🐱','Gatinho')" id="pet0">🐱</button>
+        <button onclick="trocarPet('🐶','Doguito')" id="pet1">🐶</button>
+        <button onclick="trocarPet('🐸','Sapinho')" id="pet2">🐸</button>
+        <button onclick="trocarPet('🐙','Polvinho')" id="pet3">🐙</button>
+        <button onclick="trocarPet('🦆','Patinho')" id="pet4">🦆</button>
 
     </div>
 
 
-    <div class="pet-area">
+    <div class="pet-card">
 
-        <div class="pet-platform"></div>
-
-        <div class="pet" id="mainPet">
-            🐱
+        <div class="pet-name" id="petNameDisplay">
+            Gatinho
         </div>
 
-    </div>
+        <div class="pet-container">
 
+            <div class="accessory acc-coroa" id="accCoroa">👑</div>
+            <div class="accessory acc-chapeu" id="accChapeu">🎩</div>
+            <div class="accessory acc-oculos" id="accOculos">🕶️</div>
+            <div class="accessory acc-laco" id="accLaco">🎀</div>
+            <div class="accessory acc-estrela" id="accEstrela">🌟</div>
+            <div class="accessory acc-joia" id="accJoia">💎</div>
 
-    <div class="stats">
-
-        <div class="stat">
-
-            <div class="stat-icon">🍔</div>
-
-            <div class="stat-name">
-                Fome <span id="hungerText">80</span>
-            </div>
-
-            <div class="stat-bar">
-                <div class="stat-fill hunger-fill" id="hungerBar"></div>
-            </div>
+            <div class="pet" id="mainPet">🐱</div>
 
         </div>
 
 
-        <div class="stat">
+        <div class="status-area">
 
-            <div class="stat-icon">⚡</div>
+            <div class="status">
 
-            <div class="stat-name">
-                Energia <span id="energyText">80</span>
+                <div class="status-title">
+                    <span>🍖 Fome</span>
+                    <span id="fomeText">80</span>
+                </div>
+
+                <div class="status-bar">
+                    <div class="status-fill hunger-fill" id="fomeBar"></div>
+                </div>
+
             </div>
 
-            <div class="stat-bar">
-                <div class="stat-fill energy-fill" id="energyBar"></div>
+
+            <div class="status">
+
+                <div class="status-title">
+                    <span>⚡ Energia</span>
+                    <span id="energiaText">80</span>
+                </div>
+
+                <div class="status-bar">
+                    <div class="status-fill energy-fill" id="energiaBar"></div>
+                </div>
+
+            </div>
+
+
+            <div class="status">
+
+                <div class="status-title">
+                    <span>💖 Felicidade</span>
+                    <span id="felicidadeText">80</span>
+                </div>
+
+                <div class="status-bar">
+                    <div class="status-fill happy-fill" id="felicidadeBar"></div>
+                </div>
+
             </div>
 
         </div>
 
 
-        <div class="stat">
+        <div class="quick-actions">
 
-            <div class="stat-icon">❤️</div>
+            <button class="action" onclick="comerRapido()">
+                <span>🍎</span>
+                Comer
+            </button>
 
-            <div class="stat-name">
-                Alegria <span id="happinessText">80</span>
-            </div>
+            <button class="action" onclick="jogarRapido()">
+                <span>🎮</span>
+                Brincar
+            </button>
 
-            <div class="stat-bar">
-                <div class="stat-fill happiness-fill" id="happinessBar"></div>
-            </div>
+            <button class="action" onclick="dormir()">
+                <span>😴</span>
+                Dormir
+            </button>
+
+            <button class="action" onclick="mostrarTela('bath')">
+                <span>🛁</span>
+                Banho
+            </button>
+
+            <button class="action" onclick="mostrarTela('shop')">
+                <span>👕</span>
+                Visual
+            </button>
+
+            <button class="action" onclick="mostrarTela('achievements')">
+                <span>🏆</span>
+                Conquistas
+            </button>
 
         </div>
-
-    </div>
-
-
-    <div class="quick-actions">
-
-        <button class="quick-btn" onclick="acaoComer()">
-            <span class="quick-icon">🍎</span>
-            Comer
-        </button>
-
-        <button class="quick-btn" onclick="acaoBrincar()">
-            <span class="quick-icon">🎾</span>
-            Brincar
-        </button>
-
-        <button class="quick-btn" onclick="acaoBanho()">
-            <span class="quick-icon">🛁</span>
-            Banho
-        </button>
-
-        <button class="quick-btn" onclick="acaoCarinho()">
-            <span class="quick-icon">❤️</span>
-            Carinho
-        </button>
 
     </div>
 
 </section>
 
 
-<!-- =========================
-     TELA COMIDA
-========================= -->
+<!-- ================= FOOD ================= -->
 
 <section class="screen" id="foodScreen">
 
-    <h2 class="section-title">🍔 Cozinha</h2>
+    <h2 class="title">🍖 Comida</h2>
+    <p class="subtitle">Alimente seu pet para deixar ele feliz!</p>
 
-    <p class="subtitle">
-        Alimente seu pet para recuperar a fome!
-    </p>
+    <div class="cards">
 
-    <div class="food-grid">
-
-        <div class="food-card">
-            <div class="food-icon">🍎</div>
-            <div class="food-name">Maçã</div>
-            <div class="food-effect">+15 fome</div>
-            <div class="food-price">Grátis</div>
-            <button onclick="comida('Maçã',15,0,2,0)">
-                Dar comida
+        <div class="card">
+            <div class="card-icon">🍎</div>
+            <h3>Maçã</h3>
+            <p>+15 fome</p>
+            <button onclick="darComida('Maçã',15,0,0,0)">
+                Grátis
             </button>
         </div>
 
-
-        <div class="food-card">
-            <div class="food-icon">🍗</div>
-            <div class="food-name">Frango</div>
-            <div class="food-effect">+30 fome</div>
-            <div class="food-price">🪙 10</div>
-            <button onclick="comida('Frango',30,10,4,5)">
-                Comprar
+        <div class="card">
+            <div class="card-icon">🍗</div>
+            <h3>Frango</h3>
+            <p>+30 fome</p>
+            <button onclick="darComida('Frango',30,10,0,0)">
+                🪙 10
             </button>
         </div>
 
-
-        <div class="food-card">
-            <div class="food-icon">🍕</div>
-            <div class="food-name">Pizza</div>
-            <div class="food-effect">+40 fome</div>
-            <div class="food-price">🪙 20</div>
-            <button onclick="comida('Pizza',40,20,7,8)">
-                Comprar
+        <div class="card">
+            <div class="card-icon">🍕</div>
+            <h3>Pizza</h3>
+            <p>+40 fome</p>
+            <button onclick="darComida('Pizza',40,20,0,5)">
+                🪙 20
             </button>
         </div>
 
-
-        <div class="food-card">
-            <div class="food-icon">🍔</div>
-            <div class="food-name">Hambúrguer</div>
-            <div class="food-effect">+50 fome</div>
-            <div class="food-price">🪙 30</div>
-            <button onclick="comida('Hambúrguer',50,30,5,12)">
-                Comprar
+        <div class="card">
+            <div class="card-icon">🍔</div>
+            <h3>Hambúrguer</h3>
+            <p>+50 fome</p>
+            <button onclick="darComida('Hambúrguer',50,30,0,8)">
+                🪙 30
             </button>
         </div>
 
-
-        <div class="food-card">
-            <div class="food-icon">🍰</div>
-            <div class="food-name">Bolo</div>
-            <div class="food-effect">+60 fome +15 alegria</div>
-            <div class="food-price">🪙 40</div>
-            <button onclick="comida('Bolo',60,40,15,15)">
-                Comprar
+        <div class="card">
+            <div class="card-icon">🍰</div>
+            <h3>Bolo</h3>
+            <p>+60 fome e +15 felicidade</p>
+            <button onclick="darComida('Bolo',60,40,0,15)">
+                🪙 40
             </button>
         </div>
 
-
-        <div class="food-card">
-            <div class="food-icon">🍉</div>
-            <div class="food-name">Melancia</div>
-            <div class="food-effect">+25 fome +5 alegria</div>
-            <div class="food-price">🪙 5</div>
-            <button onclick="comida('Melancia',25,5,5,3)">
-                Comprar
+        <div class="card">
+            <div class="card-icon">🍉</div>
+            <h3>Melancia</h3>
+            <p>+25 fome e +5 felicidade</p>
+            <button onclick="darComida('Melancia',25,5,0,5)">
+                🪙 5
             </button>
         </div>
 
@@ -1007,124 +953,102 @@ body.dark .achievement-info p {
 </section>
 
 
-<!-- =========================
-     TELA JOGOS
-========================= -->
+<!-- ================= GAMES ================= -->
 
 <section class="screen" id="gamesScreen">
 
-    <h2 class="section-title">🎮 Jogos</h2>
+    <h2 class="title">🎮 Jogos</h2>
 
-    <p class="subtitle">
-        Brinque para ganhar moedas e XP!
-    </p>
+    <div class="game-card">
 
+        <h2>⚡ Clique Rápido</h2>
 
-    <div class="games-grid">
+        <p>Clique o máximo que conseguir!</p>
 
-        <div class="game-card">
-
-            <h3>🎯 Clique Rápido</h3>
-
-            <p>
-                Clique no alvo o máximo que conseguir!
-            </p>
-
-            <button class="game-button" onclick="iniciarJogo()">
-                Jogar
-            </button>
-
+        <div class="click-count" id="clickCount">
+            0
         </div>
 
+        <button class="game-button" onclick="clicarJogo()">
+            👆 CLIQUE!
+        </button>
 
-        <div class="game-card">
+        <br>
 
-            <h3>🧠 Memória</h3>
+        <button
+            class="game-button"
+            onclick="finalizarJogo()"
+            style="background:#7c3aed;">
+            🏁 Finalizar
+        </button>
 
-            <p>
-                Em breve você poderá testar sua memória.
-            </p>
-
-            <button class="game-button" onclick="mostrarToast('🧠 O jogo de memória chegará em breve!')">
-                Em breve
-            </button>
-
-        </div>
-
-
-        <div class="game-card">
-
-            <h3>🏀 Cesta</h3>
-
-            <p>
-                Acerte a cesta para conseguir moedas.
-            </p>
-
-            <button class="game-button" onclick="mostrarToast('🏀 Esse mini-jogo será desbloqueado no nível 3!')">
-                Nível 3
-            </button>
-
-        </div>
+    </div>
 
 
-        <div class="game-card">
+    <div class="game-card">
 
-            <h3>🐾 Pegue o Pet</h3>
+        <h2>🧠 Memória</h2>
 
-            <p>
-                Um desafio maluco está chegando!
-            </p>
+        <p>Em breve você poderá jogar esse mini-game!</p>
 
-            <button class="game-button" onclick="mostrarToast('🐾 Em desenvolvimento!')">
-                Em breve
-            </button>
+        <button class="game-button"
+                onclick="mostrarToast('🧠 O jogo da memória está chegando!')">
+            Jogar
+        </button>
 
-        </div>
+    </div>
+
+
+    <div class="game-card">
+
+        <h2>🧺 Cesta</h2>
+
+        <p>Capture os objetos que caem!</p>
+
+        <button class="game-button"
+                onclick="mostrarToast('🧺 Esse jogo será desbloqueado em breve!')">
+            Jogar
+        </button>
 
     </div>
 
 </section>
 
 
-<!-- =========================
-     TELA BANHO
-========================= -->
+<!-- ================= BATH ================= -->
 
 <section class="screen" id="bathScreen">
 
-    <h2 class="section-title">🛁 Banheiro</h2>
+    <h2 class="title">🛁 Banheiro</h2>
 
-    <p class="subtitle">
-        Deixe seu pet limpinho e feliz!
-    </p>
-
-
-    <div class="bath-room">
+    <div class="bath-area">
 
         <div class="bath-pet" id="bathPet">
             🐱
         </div>
 
-        <div class="bath-actions">
+        <h2>Hora do banho!</h2>
 
-            <button class="bath-btn" onclick="tomarBanho()">
-                <span>🚿</span>
-                Tomar banho
+        <p style="margin:10px;">
+            Deixe seu pet limpinho ✨
+        </p>
+
+        <div class="bath-buttons">
+
+            <button onclick="banho('🚿')">
+                🚿 Banho
             </button>
 
-            <button class="bath-btn" onclick="usarSabao()">
-                <span>🧼</span>
-                Usar sabão
+            <button onclick="banho('🧼')">
+                🧼 Sabonete
             </button>
 
-            <button class="bath-btn" onclick="secarPet()">
-                <span>🧻</span>
-                Secar
+            <button onclick="banho('💨')">
+                💨 Secar
             </button>
 
-            <button class="bath-btn" onclick="usarPerfume()">
-                <span>🌸</span>
-                Perfume
+            <button onclick="banho('🌸')">
+                🌸 Perfume
             </button>
 
         </div>
@@ -1134,108 +1058,87 @@ body.dark .achievement-info p {
 </section>
 
 
-<!-- =========================
-     TELA LOJA
-========================= -->
+<!-- ================= SHOP ================= -->
 
 <section class="screen" id="shopScreen">
 
-    <h2 class="section-title">🛍️ Loja</h2>
+    <h2 class="title">🛍️ Loja</h2>
 
     <p class="subtitle">
-        Compre itens especiais para seu pet!
+        Compre e equipe acessórios no seu pet!
     </p>
 
+    <div class="cards">
 
-    <div class="shop-grid">
-
-        <div class="shop-item">
-
-            <div class="shop-item-icon">👑</div>
-
+        <div class="card">
+            <div class="card-icon">👑</div>
             <h3>Coroa</h3>
+            <p>Deixe seu pet real!</p>
 
-            <p>Deixe seu pet elegante.</p>
-
-            <button class="buy-button" onclick="comprarItem('coroa',100)">
+            <button id="btnCoroa"
+                    onclick="comprarOuEquipar('coroa',100)">
                 🪙 100
             </button>
-
         </div>
 
 
-        <div class="shop-item">
-
-            <div class="shop-item-icon">🎩</div>
-
+        <div class="card">
+            <div class="card-icon">🎩</div>
             <h3>Chapéu</h3>
+            <p>Elegância total!</p>
 
-            <p>Um visual muito estiloso.</p>
-
-            <button class="buy-button" onclick="comprarItem('chapeu',60)">
+            <button id="btnChapeu"
+                    onclick="comprarOuEquipar('chapeu',60)">
                 🪙 60
             </button>
-
         </div>
 
 
-        <div class="shop-item">
-
-            <div class="shop-item-icon">🕶️</div>
-
+        <div class="card">
+            <div class="card-icon">🕶️</div>
             <h3>Óculos</h3>
+            <p>Pet estiloso!</p>
 
-            <p>Agora seu pet é radical.</p>
-
-            <button class="buy-button" onclick="comprarItem('oculos',50)">
+            <button id="btnOculos"
+                    onclick="comprarOuEquipar('oculos',50)">
                 🪙 50
             </button>
-
         </div>
 
 
-        <div class="shop-item">
-
-            <div class="shop-item-icon">🎀</div>
-
+        <div class="card">
+            <div class="card-icon">🎀</div>
             <h3>Laço</h3>
+            <p>Fofo demais!</p>
 
-            <p>Um acessório fofo.</p>
-
-            <button class="buy-button" onclick="comprarItem('laco',40)">
+            <button id="btnLaco"
+                    onclick="comprarOuEquipar('laco',40)">
                 🪙 40
             </button>
-
         </div>
 
 
-        <div class="shop-item">
-
-            <div class="shop-item-icon">🌟</div>
-
+        <div class="card">
+            <div class="card-icon">🌟</div>
             <h3>Estrela</h3>
+            <p>Brilhe muito!</p>
 
-            <p>Decoração especial.</p>
-
-            <button class="buy-button" onclick="comprarItem('estrela',80)">
+            <button id="btnEstrela"
+                    onclick="comprarOuEquipar('estrela',80)">
                 🪙 80
             </button>
-
         </div>
 
 
-        <div class="shop-item">
-
-            <div class="shop-item-icon">💎</div>
-
+        <div class="card">
+            <div class="card-icon">💎</div>
             <h3>Joia</h3>
+            <p>Um acessório raro!</p>
 
-            <p>Item extremamente raro.</p>
-
-            <button class="buy-button" onclick="comprarItem('joia',150)">
+            <button id="btnJoia"
+                    onclick="comprarOuEquipar('joia',150)">
                 🪙 150
             </button>
-
         </div>
 
     </div>
@@ -1243,230 +1146,169 @@ body.dark .achievement-info p {
 </section>
 
 
-<!-- =========================
-     TELA CONQUISTAS
-========================= -->
+<!-- ================= ACHIEVEMENTS ================= -->
 
 <section class="screen" id="achievementsScreen">
 
-    <h2 class="section-title">🏆 Conquistas</h2>
+    <h2 class="title">🏆 Conquistas</h2>
 
-    <p class="subtitle">
-        Complete objetivos e desbloqueie segredos!
-    </p>
-
-
-    <div class="achievement" id="ach1">
-
-        <div class="achievement-icon">🍎</div>
-
-        <div class="achievement-info">
-            <h3>Primeira Refeição</h3>
-            <p>Alimente seu pet pela primeira vez.</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
-
-
-    <div class="achievement" id="ach2">
-
-        <div class="achievement-icon">🎮</div>
-
-        <div class="achievement-info">
-            <h3>Jogador</h3>
-            <p>Jogue seu primeiro mini-jogo.</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
-
-
-    <div class="achievement" id="ach3">
-
-        <div class="achievement-icon">🛁</div>
-
-        <div class="achievement-info">
-            <h3>Cheirosinho</h3>
-            <p>Dê banho no seu pet.</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
-
-
-    <div class="achievement" id="ach4">
-
-        <div class="achievement-icon">🪙</div>
-
-        <div class="achievement-info">
-            <h3>Rico</h3>
-            <p>Tenha 500 moedas.</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
-
-
-    <div class="achievement" id="ach5">
-
-        <div class="achievement-icon">⭐</div>
-
-        <div class="achievement-info">
-            <h3>Nível 5</h3>
-            <p>Chegue ao nível 5.</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
-
-
-    <div class="achievement" id="ach6">
-
-        <div class="achievement-icon">🔐</div>
-
-        <div class="achievement-info">
-            <h3>???</h3>
-            <p>Existe um segredo escondido...</p>
-        </div>
-
-        <strong>🔒</strong>
-
-    </div>
+    <div id="achievementsList"></div>
 
 </section>
 
 
-<!-- =========================
-     TELA CONFIGURAÇÕES
-========================= -->
+<!-- ================= SETTINGS ================= -->
 
 <section class="screen" id="settingsScreen">
 
-    <h2 class="section-title">⚙️ Configurações</h2>
-
-    <div class="settings-list">
-
-        <div class="setting">
-
-            <div>
-                <strong>Nome do pet</strong>
-
-                <input
-                    class="name-input"
-                    id="nameInput"
-                    maxlength="18"
-                    placeholder="Nome do pet"
-                    onchange="alterarNome()"
-                >
-            </div>
-
-        </div>
+    <h2 class="title">⚙️ Configurações</h2>
 
 
-        <div class="setting">
+    <div class="setting">
 
-            <div>
-                <strong>🌙 Tema escuro</strong>
-            </div>
+        <b>✏️ Nome do Pet</b>
 
-            <button onclick="alternarTema()">
-                Alternar
+        <input
+            id="petNameInput"
+            placeholder="Digite um nome">
+
+        <button onclick="salvarNome()">
+            💾 Salvar nome
+        </button>
+
+    </div>
+
+
+    <div class="setting">
+
+        <div class="toggle">
+
+            <b>🌙 Modo escuro</b>
+
+            <button onclick="alternarTema()"
+                    id="themeButton">
+                Ativar
             </button>
 
         </div>
 
+    </div>
 
-        <div class="setting">
 
-            <div>
-                <strong>🔊 Som</strong>
-            </div>
+    <div class="setting">
 
-            <button onclick="alternarSom()" id="soundButton">
+        <div class="toggle">
+
+            <b>🔊 Sons</b>
+
+            <button onclick="alternarSom()"
+                    id="soundButton">
                 Ligado
             </button>
 
         </div>
 
-
-        <div class="setting">
-
-            <div>
-                <strong>🔐 Segredo</strong>
-            </div>
-
-            <button onclick="codigoSecreto()">
-                Descobrir
-            </button>
-
-        </div>
+    </div>
 
 
-        <div class="setting">
+    <div class="setting">
 
-            <div>
-                <strong>💾 Progresso</strong>
-            </div>
+        <b>🔐 Código secreto</b>
 
-            <button onclick="salvarJogo()">
-                Salvar
-            </button>
+        <input
+            id="secretInput"
+            placeholder="Digite o código">
 
-        </div>
+        <button onclick="usarCodigo()">
+            🔓 Ativar
+        </button>
+
+    </div>
 
 
-        <div class="setting">
+    <div class="setting">
 
-            <div>
-                <strong>⚠️ Resetar jogo</strong>
-            </div>
+        <b>💾 Dados</b>
 
-            <button onclick="resetarJogo()">
-                Resetar
-            </button>
+        <br>
 
-        </div>
+        <button onclick="salvarJogo()">
+            💾 Salvar agora
+        </button>
+
+        <button
+            onclick="resetarJogo()"
+            style="background:#ef4444;">
+            🗑️ Resetar jogo
+        </button>
+
+    </div>
+
+
+    <div class="setting" style="text-align:center">
+
+        <b>🐾 Pet World 2.0</b>
+
+        <p style="margin-top:6px;color:#777;">
+            Feito com carinho 💜
+        </p>
 
     </div>
 
 </section>
 
 
-<!-- =========================
-     MENU
-========================= -->
+<!-- ================= NAV ================= -->
 
 <nav class="bottom-nav">
 
-    <button class="nav-button active" onclick="trocarTela('homeScreen',this)">
+    <button class="nav-btn active"
+            onclick="mostrarTela('home')"
+            id="navHome">
+
         <span>🏠</span>
-        Início
+        Casa
+
     </button>
 
-    <button class="nav-button" onclick="trocarTela('foodScreen',this)">
-        <span>🍔</span>
+
+    <button class="nav-btn"
+            onclick="mostrarTela('food')"
+            id="navFood">
+
+        <span>🍖</span>
         Comida
+
     </button>
 
-    <button class="nav-button" onclick="trocarTela('gamesScreen',this)">
+
+    <button class="nav-btn"
+            onclick="mostrarTela('games')"
+            id="navGames">
+
         <span>🎮</span>
         Jogos
+
     </button>
 
-    <button class="nav-button" onclick="trocarTela('bathScreen',this)">
+
+    <button class="nav-btn"
+            onclick="mostrarTela('bath')"
+            id="navBath">
+
         <span>🛁</span>
         Banho
+
     </button>
 
-    <button class="nav-button" onclick="trocarTela('shopScreen',this)">
+
+    <button class="nav-btn"
+            onclick="mostrarTela('shop')"
+            id="navShop">
+
         <span>🛍️</span>
         Loja
+
     </button>
 
 </nav>
@@ -1474,40 +1316,50 @@ body.dark .achievement-info p {
 </div>
 
 
-<!-- =========================
-     MINI GAME
-========================= -->
+<!-- ================= SONO ================= -->
 
-<div class="game-box" id="gameBox">
+<div class="sleep-overlay" id="sleepOverlay">
 
-    <div class="game-window">
+    <div class="sleep-window">
 
-        <h2>🎯 Clique Rápido</h2>
-
-        <p>
-            Clique no alvo!
-        </p>
-
-        <div class="game-score">
-            Pontos: <span id="gameScore">0</span>
+        <div class="sleep-title">
+            🌙 Boa noite!
         </div>
 
-        <div
-            class="game-target"
-            id="gameTarget"
-            onclick="clicarAlvo()"
-        >
-            🎯
+        <div class="sleep-subtitle">
+            As luzes estão apagadas...
         </div>
 
-        <p>
-            Tempo: <span id="gameTime">10</span>s
+
+        <div class="sleep-pet-container">
+
+            <div class="sleep-pet" id="sleepPet">
+                🐱
+            </div>
+
+            <div class="zzz">
+                💤
+            </div>
+
+        </div>
+
+
+        <h2>😴 Zzz...</h2>
+
+        <p style="margin-top:8px;color:#aaa;">
+            Seu pet está dormindo.
         </p>
 
-        <br>
+        <p style="margin-top:5px;color:#8ee7ff;">
+            ⚡ Energia recuperando...
+        </p>
 
-        <button class="close-game" onclick="fecharJogo()">
-            Sair
+
+        <button class="wake-button"
+                onclick="acordar()">
+
+            💡 Acender a luz e acordar
+
         </button>
 
     </div>
@@ -1515,20 +1367,18 @@ body.dark .achievement-info p {
 </div>
 
 
-<!-- =========================
-     TOAST
-========================= -->
+<!-- ================= TOAST ================= -->
 
 <div class="toast" id="toast"></div>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    ESTADO DO JOGO
-===================================================== */
+========================================================= */
 
-let estado = {
+const estadoInicial = {
 
     pet: "🐱",
     petNome: "Gatinho",
@@ -1545,67 +1395,125 @@ let estado = {
     nome: "Meu Pet",
 
     som: true,
+    temaEscuro: false,
 
     itens: [],
 
+    acessorios: {
+        coroa: false,
+        chapeu: false,
+        oculos: false,
+        laco: false,
+        estrela: false,
+        joia: false
+    },
+
     conquistas: [],
 
-    segredo: false
+    segredo: false,
+
+    comidasDadas: 0,
+    jogosJogados: 0,
+    banhosDados: 0
 
 };
 
 
-/* =====================================================
+let estado = carregarJogo();
+
+let dormindo = false;
+
+let clicks = 0;
+
+
+/* =========================================================
    CARREGAR
-===================================================== */
+========================================================= */
 
 function carregarJogo() {
 
-    const salvo = localStorage.getItem("petWorldSave");
+    const salvo = localStorage.getItem("petWorld2");
 
-    if (salvo) {
+    if (!salvo) {
 
-        try {
-
-            estado = {
-                ...estado,
-                ...JSON.parse(salvo)
-            };
-
-        } catch(e) {
-
-            console.log("Erro ao carregar save.");
-
-        }
+        return JSON.parse(JSON.stringify(estadoInicial));
 
     }
 
-    atualizarTela();
+    try {
+
+        const dados = JSON.parse(salvo);
+
+        return {
+
+            ...JSON.parse(JSON.stringify(estadoInicial)),
+            ...dados,
+
+            acessorios: {
+                ...estadoInicial.acessorios,
+                ...(dados.acessorios || {})
+            },
+
+            itens: dados.itens || [],
+            conquistas: dados.conquistas || []
+
+        };
+
+    } catch {
+
+        return JSON.parse(JSON.stringify(estadoInicial));
+
+    }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SALVAR
-===================================================== */
+========================================================= */
 
 function salvarJogo() {
 
     localStorage.setItem(
-        "petWorldSave",
+        "petWorld2",
         JSON.stringify(estado)
     );
-
-    mostrarToast("💾 Jogo salvo!");
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   LIMITAR STATUS
+========================================================= */
+
+function limitarStatus() {
+
+    estado.fome = Math.max(
+        0,
+        Math.min(100, estado.fome)
+    );
+
+    estado.energia = Math.max(
+        0,
+        Math.min(100, estado.energia)
+    );
+
+    estado.felicidade = Math.max(
+        0,
+        Math.min(100, estado.felicidade)
+    );
+
+}
+
+
+/* =========================================================
    ATUALIZAR TELA
-===================================================== */
+========================================================= */
 
 function atualizarTela() {
+
+    limitarStatus();
+
 
     document.getElementById("mainPet").textContent =
         estado.pet;
@@ -1613,84 +1521,224 @@ function atualizarTela() {
     document.getElementById("bathPet").textContent =
         estado.pet;
 
-    document.getElementById("greetingPet").textContent =
-        estado.nome;
 
-    document.getElementById("petNameTop").textContent =
-        estado.nome;
+    document.getElementById("petNameDisplay").textContent =
+        estado.petNome;
 
-    document.getElementById("nameInput").value =
-        estado.nome;
+    document.getElementById("topPetName").textContent =
+        estado.petNome;
 
-    document.getElementById("coins").textContent =
+
+    document.getElementById("coinsDisplay").textContent =
         estado.moedas;
 
-    document.getElementById("level").textContent =
+    document.getElementById("levelDisplay").textContent =
         estado.nivel;
 
-    document.getElementById("hungerText").textContent =
-        Math.round(estado.fome);
 
-    document.getElementById("energyText").textContent =
-        Math.round(estado.energia);
+    document.getElementById("fomeText").textContent =
+        estado.fome;
 
-    document.getElementById("happinessText").textContent =
-        Math.round(estado.felicidade);
+    document.getElementById("energiaText").textContent =
+        estado.energia;
+
+    document.getElementById("felicidadeText").textContent =
+        estado.felicidade;
 
 
-    document.getElementById("hungerBar").style.width =
+    document.getElementById("fomeBar").style.width =
         estado.fome + "%";
 
-    document.getElementById("energyBar").style.width =
+    document.getElementById("energiaBar").style.width =
         estado.energia + "%";
 
-    document.getElementById("happinessBar").style.width =
+    document.getElementById("felicidadeBar").style.width =
         estado.felicidade + "%";
 
 
-    const xpNecessario =
-        estado.nivel * 100;
+    const xpNecessario = estado.nivel * 100;
 
-    const xpPercent =
+    document.getElementById("xpFill").style.width =
         Math.min(
             100,
             (estado.xp / xpNecessario) * 100
+        ) + "%";
+
+
+    document.getElementById("petNameInput").value =
+        estado.petNome;
+
+
+    atualizarPetSelecionado();
+    atualizarAcessorios();
+    atualizarLoja();
+    atualizarConquistas();
+    atualizarConfiguracoes();
+
+
+    if (estado.temaEscuro) {
+
+        document.body.classList.add("dark");
+
+    } else {
+
+        document.body.classList.remove("dark");
+
+    }
+
+}
+
+
+/* =========================================================
+   TROCAR PET
+========================================================= */
+
+function trocarPet(pet, nome) {
+
+    if (dormindo) {
+
+        mostrarToast("😴 Seu pet está dormindo!");
+
+        return;
+
+    }
+
+    estado.pet = pet;
+    estado.petNome = nome;
+
+    atualizarTela();
+
+    salvarJogo();
+
+    som("pop");
+
+    mostrarToast(
+        "🐾 Você escolheu o " + nome + "!"
+    );
+
+}
+
+
+/* =========================================================
+   PET SELECIONADO
+========================================================= */
+
+function atualizarPetSelecionado() {
+
+    const botoes = [
+        "pet0",
+        "pet1",
+        "pet2",
+        "pet3",
+        "pet4"
+    ];
+
+    const pets = [
+        "🐱",
+        "🐶",
+        "🐸",
+        "🐙",
+        "🦆"
+    ];
+
+    botoes.forEach((id,i) => {
+
+        const botao =
+            document.getElementById(id);
+
+        botao.classList.toggle(
+            "selected",
+            estado.pet === pets[i]
         );
 
-    document.getElementById("xpFill").style.width =
-        xpPercent + "%";
-
-
-    document.getElementById("soundButton").textContent =
-        estado.som ? "Ligado" : "Desligado";
-
-
-    atualizarConquistas();
+    });
 
 }
 
 
-/* =====================================================
-   LIMITAR STATUS
-===================================================== */
+/* =========================================================
+   TELAS
+========================================================= */
 
-function limitarStatus() {
+function mostrarTela(tela) {
 
-    estado.fome =
-        Math.max(0, Math.min(100, estado.fome));
+    if (dormindo) {
 
-    estado.energia =
-        Math.max(0, Math.min(100, estado.energia));
+        mostrarToast(
+            "🌙 Seu pet está dormindo..."
+        );
 
-    estado.felicidade =
-        Math.max(0, Math.min(100, estado.felicidade));
+        return;
+
+    }
+
+
+    const telas = [
+        "home",
+        "food",
+        "games",
+        "bath",
+        "shop",
+        "achievements",
+        "settings"
+    ];
+
+
+    telas.forEach(nome => {
+
+        const elemento =
+            document.getElementById(
+                nome + "Screen"
+            );
+
+        if (elemento) {
+
+            elemento.classList.remove("active");
+
+        }
+
+    });
+
+
+    const telaEscolhida =
+        document.getElementById(
+            tela + "Screen"
+        );
+
+    if (telaEscolhida) {
+
+        telaEscolhida.classList.add("active");
+
+    }
+
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+
+    const mapa = {
+        home: "navHome",
+        food: "navFood",
+        games: "navGames",
+        bath: "navBath",
+        shop: "navShop"
+    };
+
+
+    if (mapa[tela]) {
+
+        document
+            .getElementById(mapa[tela])
+            .classList.add("active");
+
+    }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    XP
-===================================================== */
+========================================================= */
 
 function ganharXP(valor) {
 
@@ -1698,6 +1746,7 @@ function ganharXP(valor) {
 
     const necessario =
         estado.nivel * 100;
+
 
     if (estado.xp >= necessario) {
 
@@ -1709,323 +1758,48 @@ function ganharXP(valor) {
 
         mostrarToast(
             "🎉 LEVEL UP! Você chegou ao nível " +
-            estado.nivel + "!"
+            estado.nivel +
+            "! +50 🪙"
         );
+
+        som("level");
 
     }
 
-}
-
-
-/* =====================================================
-   TROCAR TELA
-===================================================== */
-
-function trocarTela(id, botao) {
-
-    document.querySelectorAll(".screen")
-        .forEach(tela => {
-            tela.classList.remove("active");
-        });
-
-
-    document.getElementById(id)
-        .classList.add("active");
-
-
-    document.querySelectorAll(".nav-button")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-
-    botao.classList.add("active");
+    verificarConquistas();
 
 }
 
 
-/* =====================================================
-   ESCOLHER PET
-===================================================== */
+/* =========================================================
+   COMER
+========================================================= */
 
-function escolherPet(emoji, nome, elemento) {
+function comerRapido() {
 
-    estado.pet = emoji;
-    estado.petNome = nome;
-
-    document.querySelectorAll(".pet-option")
-        .forEach(p => p.classList.remove("active"));
-
-    elemento.classList.add("active");
-
-    atualizarTela();
-
-    salvarJogo();
-
-    mostrarToast(
-        "🐾 Agora você tem um " + nome + "!"
-    );
-
-}
-
-
-/* =====================================================
-   EFEITO PET
-===================================================== */
-
-function animarPet() {
-
-    const pet =
-        document.getElementById("mainPet");
-
-    pet.classList.remove("happy");
-
-    void pet.offsetWidth;
-
-    pet.classList.add("happy");
-
-}
-
-
-/* =====================================================
-   COMER RÁPIDO
-===================================================== */
-
-function acaoComer() {
-
-    comida(
+    darComida(
         "Maçã",
         15,
         0,
-        2,
+        0,
         0
     );
 
 }
 
 
-/* =====================================================
-   COMIDA
-===================================================== */
-
-function comida(
+function darComida(
     nome,
     fome,
     preco,
-    felicidade,
-    xp
+    energia,
+    felicidade
 ) {
 
-    if (preco > estado.moedas) {
-
-        mostrarToast("❌ Você não tem moedas suficientes!");
-
-        return;
-
-    }
-
-
-    estado.moedas -= preco;
-
-    estado.fome += fome;
-
-    estado.felicidade += felicidade;
-
-    ganharXP(xp);
-
-    limitarStatus();
-
-    animarPet();
-
-    mostrarToast(
-        "🍴 " + nome + " foi servido!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-    verificarConquistas();
-
-}
-
-
-/* =====================================================
-   BRINCAR
-===================================================== */
-
-function acaoBrincar() {
-
-    if (estado.energia < 15) {
+    if (dormindo) {
 
         mostrarToast(
-            "😴 Seu pet está cansado!"
-        );
-
-        return;
-
-    }
-
-
-    estado.energia -= 15;
-
-    estado.fome -= 8;
-
-    estado.felicidade += 20;
-
-    estado.moedas += 8;
-
-    ganharXP(12);
-
-    limitarStatus();
-
-    animarPet();
-
-    mostrarToast(
-        "🎾 Seu pet adorou brincar!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-/* =====================================================
-   CARINHO
-===================================================== */
-
-function acaoCarinho() {
-
-    estado.felicidade += 10;
-
-    estado.moedas += 2;
-
-    ganharXP(5);
-
-    limitarStatus();
-
-    animarPet();
-
-    mostrarToast(
-        "❤️ Seu pet recebeu carinho!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-/* =====================================================
-   BANHO
-===================================================== */
-
-function acaoBanho() {
-
-    tomarBanho();
-
-}
-
-
-function tomarBanho() {
-
-    estado.felicidade += 12;
-
-    estado.energia -= 3;
-
-    estado.moedas += 5;
-
-    ganharXP(10);
-
-    limitarStatus();
-
-    animarPet();
-
-    mostrarToast(
-        "🚿 Seu pet tomou banho!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-    verificarConquistas();
-
-}
-
-
-function usarSabao() {
-
-    estado.felicidade += 8;
-
-    ganharXP(5);
-
-    limitarStatus();
-
-    mostrarToast(
-        "🧼 Ensaboou direitinho!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-function secarPet() {
-
-    estado.felicidade += 5;
-
-    ganharXP(4);
-
-    limitarStatus();
-
-    mostrarToast(
-        "🧻 Pet sequinho!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-function usarPerfume() {
-
-    estado.felicidade += 10;
-
-    estado.moedas += 3;
-
-    ganharXP(6);
-
-    limitarStatus();
-
-    mostrarToast(
-        "🌸 Agora está cheirosinho!"
-    );
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-/* =====================================================
-   LOJA
-===================================================== */
-
-function comprarItem(item, preco) {
-
-    if (estado.itens.includes(item)) {
-
-        mostrarToast(
-            "✅ Você já possui esse item!"
+            "😴 Não acorde seu pet!"
         );
 
         return;
@@ -2036,7 +1810,240 @@ function comprarItem(item, preco) {
     if (estado.moedas < preco) {
 
         mostrarToast(
-            "❌ Moedas insuficientes!"
+            "❌ Você não tem moedas suficientes!"
+        );
+
+        return;
+
+    }
+
+
+    estado.moedas -= preco;
+
+    estado.fome += fome;
+    estado.energia += energia;
+    estado.felicidade += felicidade;
+
+    estado.comidasDadas++;
+
+    ganharXP(5);
+
+    limitarStatus();
+
+    salvarJogo();
+
+    atualizarTela();
+
+    som("eat");
+
+    mostrarToast(
+        "😋 " + nome + " delicioso!"
+    );
+
+}
+
+
+/* =========================================================
+   JOGO
+========================================================= */
+
+function jogarRapido() {
+
+    mostrarTela("games");
+
+}
+
+
+function clicarJogo() {
+
+    if (dormindo) return;
+
+    clicks++;
+
+    document.getElementById("clickCount")
+        .textContent = clicks;
+
+    estado.felicidade =
+        Math.min(100, estado.felicidade + 0.5);
+
+}
+
+
+function finalizarJogo() {
+
+    if (clicks <= 0) {
+
+        mostrarToast(
+            "👆 Clique algumas vezes primeiro!"
+        );
+
+        return;
+
+    }
+
+
+    const premio =
+        Math.min(50, Math.max(5, clicks));
+
+    estado.moedas += premio;
+
+    estado.felicidade += 8;
+
+    estado.energia -= 5;
+
+    estado.jogosJogados++;
+
+    ganharXP(10);
+
+    clicks = 0;
+
+    document.getElementById("clickCount")
+        .textContent = "0";
+
+
+    limitarStatus();
+
+    salvarJogo();
+
+    atualizarTela();
+
+    som("coin");
+
+    mostrarToast(
+        "🎮 Você ganhou " +
+        premio +
+        " moedas!"
+    );
+
+}
+
+
+/* =========================================================
+   BANHO
+========================================================= */
+
+function banho(tipo) {
+
+    if (dormindo) {
+
+        mostrarToast(
+            "😴 O pet está dormindo!"
+        );
+
+        return;
+
+    }
+
+
+    estado.felicidade += 5;
+
+    estado.energia -= 2;
+
+    estado.banhosDados++;
+
+    ganharXP(7);
+
+    limitarStatus();
+
+    salvarJogo();
+
+    atualizarTela();
+
+    som("pop");
+
+
+    const mensagens = {
+
+        "🚿": "🚿 Banho tomado!",
+        "🧼": "🧼 Ensaboando...",
+        "💨": "💨 Pet sequinho!",
+        "🌸": "🌸 Agora está cheirosinho!"
+
+    };
+
+
+    mostrarToast(
+        mensagens[tipo] || "✨ Pet limpo!"
+    );
+
+}
+
+
+/* =========================================================
+   ACESSÓRIOS
+========================================================= */
+
+const acessoriosInfo = {
+
+    coroa: {
+        id: "accCoroa",
+        botao: "btnCoroa",
+        nome: "Coroa"
+    },
+
+    chapeu: {
+        id: "accChapeu",
+        botao: "btnChapeu",
+        nome: "Chapéu"
+    },
+
+    oculos: {
+        id: "accOculos",
+        botao: "btnOculos",
+        nome: "Óculos"
+    },
+
+    laco: {
+        id: "accLaco",
+        botao: "btnLaco",
+        nome: "Laço"
+    },
+
+    estrela: {
+        id: "accEstrela",
+        botao: "btnEstrela",
+        nome: "Estrela"
+    },
+
+    joia: {
+        id: "accJoia",
+        botao: "btnJoia",
+        nome: "Joia"
+    }
+
+};
+
+
+function comprarOuEquipar(item, preco) {
+
+    if (dormindo) {
+
+        mostrarToast(
+            "😴 Seu pet está dormindo!"
+        );
+
+        return;
+
+    }
+
+
+    /* Se já comprou, apenas equipa/des-equipa */
+
+    if (estado.itens.includes(item)) {
+
+        equiparItem(item);
+
+        return;
+
+    }
+
+
+    /* Comprar */
+
+    if (estado.moedas < preco) {
+
+        mostrarToast(
+            "❌ Você precisa de mais moedas!"
         );
 
         return;
@@ -2048,35 +2055,33 @@ function comprarItem(item, preco) {
 
     estado.itens.push(item);
 
+    /* Compra já vem equipada */
+
+    estado.acessorios[item] = true;
+
     ganharXP(15);
 
-    mostrarToast(
-        "🛍️ Item comprado!"
-    );
+    salvarJogo();
 
     atualizarTela();
 
-    salvarJogo();
+    som("buy");
+
+    mostrarToast(
+        "🛍️ " +
+        acessoriosInfo[item].nome +
+        " comprado e equipado! ✨"
+    );
 
 }
 
 
-/* =====================================================
-   MINI GAME
-===================================================== */
+function equiparItem(item) {
 
-let jogoRodando = false;
-let pontosJogo = 0;
-let tempoJogo = 10;
-let intervaloJogo;
-
-
-function iniciarJogo() {
-
-    if (estado.energia < 10) {
+    if (!estado.itens.includes(item)) {
 
         mostrarToast(
-            "😴 Seu pet está sem energia!"
+            "❌ Você ainda não possui esse item!"
         );
 
         return;
@@ -2084,242 +2089,588 @@ function iniciarJogo() {
     }
 
 
-    document.getElementById("gameBox")
+    estado.acessorios[item] =
+        !estado.acessorios[item];
+
+
+    salvarJogo();
+
+    atualizarTela();
+
+    som("pop");
+
+
+    if (estado.acessorios[item]) {
+
+        mostrarToast(
+            "✨ " +
+            acessoriosInfo[item].nome +
+            " equipado!"
+        );
+
+    } else {
+
+        mostrarToast(
+            "👋 " +
+            acessoriosInfo[item].nome +
+            " retirado!"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOSTRAR ACESSÓRIOS
+========================================================= */
+
+function atualizarAcessorios() {
+
+    Object.keys(acessoriosInfo)
+        .forEach(item => {
+
+            const info =
+                acessoriosInfo[item];
+
+            const elemento =
+                document.getElementById(info.id);
+
+            if (!elemento) return;
+
+            elemento.classList.toggle(
+                "equipped",
+                !!estado.acessorios[item]
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   LOJA
+========================================================= */
+
+function atualizarLoja() {
+
+    Object.keys(acessoriosInfo)
+        .forEach(item => {
+
+            const info =
+                acessoriosInfo[item];
+
+            const botao =
+                document.getElementById(info.botao);
+
+            if (!botao) return;
+
+
+            if (!estado.itens.includes(item)) {
+
+                const precos = {
+                    coroa: 100,
+                    chapeu: 60,
+                    oculos: 50,
+                    laco: 40,
+                    estrela: 80,
+                    joia: 150
+                };
+
+                botao.textContent =
+                    "🪙 " + precos[item];
+
+                return;
+
+            }
+
+
+            if (estado.acessorios[item]) {
+
+                botao.textContent =
+                    "✅ Equipado";
+
+                botao.style.background =
+                    "#22c55e";
+
+            } else {
+
+                botao.textContent =
+                    "👕 Equipar";
+
+                botao.style.background =
+                    "#7c3aed";
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   DORMIR
+========================================================= */
+
+function dormir() {
+
+    if (dormindo) return;
+
+
+    dormindo = true;
+
+
+    document.getElementById("sleepPet")
+        .textContent = estado.pet;
+
+
+    document.getElementById("sleepOverlay")
         .classList.add("active");
 
 
-    pontosJogo = 0;
-
-    tempoJogo = 10;
-
-    jogoRodando = true;
+    som("sleep");
 
 
-    document.getElementById("gameScore")
-        .textContent = pontosJogo;
-
-    document.getElementById("gameTime")
-        .textContent = tempoJogo;
-
-
-    intervaloJogo = setInterval(() => {
-
-        tempoJogo--;
-
-        document.getElementById("gameTime")
-            .textContent = tempoJogo;
-
-
-        if (tempoJogo <= 0) {
-
-            finalizarJogo();
-
-        }
-
-    }, 1000);
+    mostrarToast(
+        "💡 Luz apagada... Boa noite! 🌙"
+    );
 
 }
 
 
-function clicarAlvo() {
+/* =========================================================
+   ACORDAR
+========================================================= */
 
-    if (!jogoRodando) return;
+function acordar() {
 
-
-    pontosJogo++;
-
-    document.getElementById("gameScore")
-        .textContent = pontosJogo;
+    if (!dormindo) return;
 
 
-    const alvo =
-        document.getElementById("gameTarget");
+    dormindo = false;
 
 
-    const x =
-        Math.random() * 220 - 110;
-
-    const y =
-        Math.random() * 100 - 50;
-
-
-    alvo.style.transform =
-        `translate(${x}px,${y}px)`;
-
-}
-
-
-function finalizarJogo() {
-
-    clearInterval(intervaloJogo);
-
-    jogoRodando = false;
-
-
-    document.getElementById("gameBox")
+    document.getElementById("sleepOverlay")
         .classList.remove("active");
 
 
-    const premio =
-        pontosJogo * 3;
+    som("wake");
 
 
-    estado.moedas += premio;
+    atualizarTela();
 
-    estado.felicidade += Math.min(
-        20,
-        pontosJogo
+    salvarJogo();
+
+
+    mostrarToast(
+        "💡 Luz acesa! ☀️ Bom dia!"
     );
 
-    estado.energia -= 10;
+}
 
-    ganharXP(
-        pontosJogo * 2
-    );
+
+/* =========================================================
+   SONO AUTOMÁTICO
+========================================================= */
+
+setInterval(() => {
+
+    if (!dormindo) return;
+
+
+    /* Energia sobe */
+
+    estado.energia += 5;
+
+
+    /* Fome diminui lentamente */
+
+    estado.fome -= 1;
+
+
+    /* Felicidade melhora */
+
+    estado.felicidade += 1;
 
 
     limitarStatus();
 
-    mostrarToast(
-        "🎮 Você fez " +
-        pontosJogo +
-        " pontos e ganhou 🪙 " +
-        premio + "!"
-    );
-
 
     atualizarTela();
 
     salvarJogo();
 
-    verificarConquistas();
 
-}
-
-
-function fecharJogo() {
-
-    clearInterval(intervaloJogo);
-
-    jogoRodando = false;
-
-    document.getElementById("gameBox")
-        .classList.remove("active");
-
-}
+}, 3000);
 
 
-/* =====================================================
-   NOME
-===================================================== */
+/* =========================================================
+   PASSAGEM DO TEMPO
+========================================================= */
 
-function alterarNome() {
+setInterval(() => {
 
-    const input =
-        document.getElementById("nameInput");
-
-    let nome =
-        input.value.trim();
+    if (dormindo) return;
 
 
-    if (nome.length === 0) {
+    estado.fome -= 1;
 
-        nome = "Meu Pet";
+    estado.energia -= 1;
+
+    estado.felicidade -= 1;
+
+
+    limitarStatus();
+
+    atualizarTela();
+
+    salvarJogo();
+
+}, 30000);
+
+
+/* =========================================================
+   CONQUISTAS
+========================================================= */
+
+const conquistasInfo = [
+
+    {
+        id: "primeiraComida",
+        icon: "🍎",
+        nome: "Primeira Refeição",
+        desc: "Dê comida ao seu pet."
+    },
+
+    {
+        id: "gamer",
+        icon: "🎮",
+        nome: "Gamer",
+        desc: "Jogue seu primeiro jogo."
+    },
+
+    {
+        id: "limpinho",
+        icon: "🛁",
+        nome: "Limpinho",
+        desc: "Dê banho no seu pet."
+    },
+
+    {
+        id: "rico",
+        icon: "💰",
+        nome: "Rico",
+        desc: "Tenha 500 moedas."
+    },
+
+    {
+        id: "nivel5",
+        icon: "⭐",
+        nome: "Nível 5",
+        desc: "Chegue ao nível 5."
+    },
+
+    {
+        id: "secreto",
+        icon: "🔐",
+        nome: "Segredo",
+        desc: "Descubra o código secreto."
+    }
+
+];
+
+
+function verificarConquistas() {
+
+    const novas = [];
+
+
+    if (
+        estado.comidasDadas >= 1 &&
+        !estado.conquistas.includes("primeiraComida")
+    ) {
+
+        novas.push("primeiraComida");
 
     }
 
 
-    estado.nome = nome;
+    if (
+        estado.jogosJogados >= 1 &&
+        !estado.conquistas.includes("gamer")
+    ) {
 
-    atualizarTela();
+        novas.push("gamer");
+
+    }
+
+
+    if (
+        estado.banhosDados >= 1 &&
+        !estado.conquistas.includes("limpinho")
+    ) {
+
+        novas.push("limpinho");
+
+    }
+
+
+    if (
+        estado.moedas >= 500 &&
+        !estado.conquistas.includes("rico")
+    ) {
+
+        novas.push("rico");
+
+    }
+
+
+    if (
+        estado.nivel >= 5 &&
+        !estado.conquistas.includes("nivel5")
+    ) {
+
+        novas.push("nivel5");
+
+    }
+
+
+    if (
+        estado.segredo &&
+        !estado.conquistas.includes("secreto")
+    ) {
+
+        novas.push("secreto");
+
+    }
+
+
+    novas.forEach(id => {
+
+        estado.conquistas.push(id);
+
+        estado.moedas += 25;
+
+        setTimeout(() => {
+
+            mostrarToast(
+                "🏆 Nova conquista! +25 🪙"
+            );
+
+        }, 200);
+
+    });
+
 
     salvarJogo();
 
+}
+
+
+function atualizarConquistas() {
+
+    const lista =
+        document.getElementById(
+            "achievementsList"
+        );
+
+
+    lista.innerHTML = "";
+
+
+    conquistasInfo.forEach(conquista => {
+
+        const desbloqueada =
+            estado.conquistas.includes(
+                conquista.id
+            );
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "achievement " +
+            (!desbloqueada ? "locked" : "");
+
+
+        div.innerHTML = `
+
+            <div class="achievement-icon">
+                ${conquista.icon}
+            </div>
+
+            <div>
+
+                <h3>
+                    ${conquista.nome}
+                </h3>
+
+                <p>
+                    ${conquista.desc}
+                </p>
+
+                <small>
+                    ${desbloqueada
+                        ? "✅ Desbloqueada"
+                        : "🔒 Bloqueada"}
+                </small>
+
+            </div>
+
+        `;
+
+
+        lista.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
+
+function salvarNome() {
+
+    if (dormindo) return;
+
+
+    const input =
+        document.getElementById(
+            "petNameInput"
+        );
+
+
+    const nome =
+        input.value.trim();
+
+
+    if (!nome) {
+
+        mostrarToast(
+            "❌ Digite um nome!"
+        );
+
+        return;
+
+    }
+
+
+    estado.petNome = nome;
+
+    salvarJogo();
+
+    atualizarTela();
+
     mostrarToast(
-        "✏️ Nome atualizado!"
+        "✏️ Nome alterado!"
     );
 
 }
 
 
-/* =====================================================
-   TEMA
-===================================================== */
-
 function alternarTema() {
 
-    document.body.classList.toggle("dark");
+    estado.temaEscuro =
+        !estado.temaEscuro;
+
+
+    atualizarTela();
+
+    salvarJogo();
 
 }
 
 
-/* =====================================================
-   SOM
-===================================================== */
+function atualizarConfiguracoes() {
+
+    document.getElementById(
+        "themeButton"
+    ).textContent =
+        estado.temaEscuro
+            ? "Desativar"
+            : "Ativar";
+
+
+    document.getElementById(
+        "soundButton"
+    ).textContent =
+        estado.som
+            ? "Ligado"
+            : "Desligado";
+
+}
+
 
 function alternarSom() {
 
     estado.som =
         !estado.som;
 
-    atualizarTela();
+
+    atualizarConfiguracoes();
 
     salvarJogo();
-
-    mostrarToast(
-        estado.som
-        ? "🔊 Som ligado!"
-        : "🔇 Som desligado!"
-    );
 
 }
 
 
-/* =====================================================
-   SEGREDO
-===================================================== */
+/* =========================================================
+   CÓDIGO SECRETO
+========================================================= */
 
-function codigoSecreto() {
+function usarCodigo() {
 
-    const codigo =
-        prompt(
-            "🔐 Digite o código secreto:"
+    const input =
+        document.getElementById(
+            "secretInput"
         );
 
 
-    if (codigo === null) return;
+    const codigo =
+        input.value.trim().toLowerCase();
+
+
+    /*
+       Códigos secretos:
+       petworld
+       polvinho
+       deusabencoe
+    */
 
 
     if (
-        codigo.toLowerCase().trim()
-        === "pet"
+        codigo === "petworld" ||
+        codigo === "polvinho" ||
+        codigo === "deusabencoe"
     ) {
 
-        if (!estado.segredo) {
+        estado.segredo = true;
 
-            estado.segredo = true;
+        /* bônus */
 
-            estado.moedas += 100;
+        estado.moedas += 200;
 
-            estado.felicidade = 100;
+        estado.felicidade = 100;
 
-            mostrarToast(
-                "🎉 SEGREDO DESBLOQUEADO! +100 moedas!"
-            );
+        ganharXP(50);
 
-            ganharXP(50);
+        verificarConquistas();
 
-            atualizarTela();
+        salvarJogo();
 
-            salvarJogo();
+        atualizarTela();
 
-        } else {
 
-            mostrarToast(
-                "👀 Você já descobriu esse segredo!"
-            );
+        mostrarToast(
+            "🔐 SEGREDO DESCOBERTO! +200 🪙"
+        );
 
-        }
+
+        input.value = "";
 
     } else {
 
@@ -2332,210 +2683,15 @@ function codigoSecreto() {
 }
 
 
-/* =====================================================
-   CONQUISTAS
-===================================================== */
-
-function desbloquearConquista(
-    id
-) {
-
-    if (
-        estado.conquistas.includes(id)
-    ) return;
-
-
-    estado.conquistas.push(id);
-
-    estado.moedas += 25;
-
-    ganharXP(20);
-
-
-    mostrarToast(
-        "🏆 Conquista desbloqueada!"
-    );
-
-
-    atualizarTela();
-
-    salvarJogo();
-
-}
-
-
-function verificarConquistas() {
-
-    if (
-        estado.fome > 0 &&
-        !estado.conquistas.includes("ach1")
-    ) {
-
-        desbloquearConquista("ach1");
-
-    }
-
-
-    if (
-        estado.nivel >= 5 &&
-        !estado.conquistas.includes("ach5")
-    ) {
-
-        desbloquearConquista("ach5");
-
-    }
-
-
-    if (
-        estado.moedas >= 500 &&
-        !estado.conquistas.includes("ach4")
-    ) {
-
-        desbloquearConquista("ach4");
-
-    }
-
-
-    if (
-        estado.segredo &&
-        !estado.conquistas.includes("ach6")
-    ) {
-
-        desbloquearConquista("ach6");
-
-    }
-
-}
-
-
-function atualizarConquistas() {
-
-    estado.conquistas.forEach(id => {
-
-        const el =
-            document.getElementById(id);
-
-        if (!el) return;
-
-        el.classList.remove("locked");
-
-        const strong =
-            el.querySelector("strong");
-
-        if (strong) {
-
-            strong.textContent = "✅";
-
-        }
-
-    });
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-
-function mostrarToast(texto) {
-
-    const toast =
-        document.getElementById("toast");
-
-
-    toast.textContent =
-        texto;
-
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 2200);
-
-}
-
-
-/* =====================================================
-   PASSAGEM DO TEMPO
-===================================================== */
-
-setInterval(() => {
-
-    estado.fome -= 1;
-
-    estado.energia -= .3;
-
-    estado.felicidade -= .4;
-
-
-    limitarStatus();
-
-    atualizarTela();
-
-    salvarJogo();
-
-
-}, 30000);
-
-
-/* =====================================================
-   RANDOM EVENTS
-===================================================== */
-
-setInterval(() => {
-
-    const sorte =
-        Math.random();
-
-
-    if (sorte < .15) {
-
-        const premio =
-            Math.floor(
-                Math.random() * 15
-            ) + 5;
-
-
-        estado.moedas += premio;
-
-
-        mostrarToast(
-            "🎁 Evento aleatório! +" +
-            premio +
-            " moedas!"
-        );
-
-
-        atualizarTela();
-
-        salvarJogo();
-
-    }
-
-
-}, 60000);
-
-
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 function resetarJogo() {
 
     const confirmar =
         confirm(
-            "⚠️ Tem certeza que deseja apagar todo o progresso?"
+            "Tem certeza que deseja apagar todo o progresso?"
         );
 
 
@@ -2543,7 +2699,7 @@ function resetarJogo() {
 
 
     localStorage.removeItem(
-        "petWorldSave"
+        "petWorld2"
     );
 
 
@@ -2552,11 +2708,184 @@ function resetarJogo() {
 }
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
+/* =========================================================
+   TOAST
+========================================================= */
 
-carregarJogo();
+let toastTimer;
+
+
+function mostrarToast(texto) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent = texto;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2200);
+
+}
+
+
+/* =========================================================
+   SOM
+========================================================= */
+
+function som(tipo) {
+
+    if (!estado.som) return;
+
+
+    try {
+
+        const audio =
+            new AudioContext();
+
+
+        const oscillator =
+            audio.createOscillator();
+
+
+        const gain =
+            audio.createGain();
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audio.destination
+        );
+
+
+        const frequencias = {
+
+            pop: 500,
+            eat: 650,
+            coin: 850,
+            buy: 700,
+            level: 1000,
+            sleep: 300,
+            wake: 600
+
+        };
+
+
+        oscillator.frequency.value =
+            frequencias[tipo] || 500;
+
+
+        oscillator.type = "sine";
+
+
+        gain.gain.setValueAtTime(
+            .08,
+            audio.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audio.currentTime + .15
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audio.currentTime + .15
+        );
+
+    } catch(e) {}
+
+}
+
+
+/* =========================================================
+   EVENTOS ALEATÓRIOS
+========================================================= */
+
+setInterval(() => {
+
+    if (dormindo) return;
+
+
+    const chance =
+        Math.random();
+
+
+    if (chance < .08) {
+
+        const eventos = [
+
+            "🐾 Seu pet encontrou uma moeda! +10 🪙",
+
+            "❤️ Seu pet está muito feliz!",
+
+            "✨ Seu pet está brilhando hoje!",
+
+            "🎁 Um presente apareceu! +15 🪙"
+
+        ];
+
+
+        const evento =
+            eventos[
+                Math.floor(
+                    Math.random() *
+                    eventos.length
+                )
+            ];
+
+
+        if (evento.includes("moeda")) {
+
+            estado.moedas += 10;
+
+        }
+
+
+        if (evento.includes("presente")) {
+
+            estado.moedas += 15;
+
+        }
+
+
+        estado.felicidade += 3;
+
+        limitarStatus();
+
+        salvarJogo();
+
+        atualizarTela();
+
+        mostrarToast(evento);
+
+    }
+
+}, 15000);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+verificarConquistas();
+
+atualizarTela();
 
 </script>
 
