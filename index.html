@@ -1,1 +1,1720 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>🐾 PET WORLD</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #7c4dff;
+    --secondary: #00c6ff;
+    --pink: #ff4fa3;
+    --green: #35d07f;
+    --yellow: #ffd54f;
+    --dark: #17152b;
+    --card: rgba(255,255,255,.12);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: white;
+    background:
+        radial-gradient(circle at 20% 20%, #4b2a91 0%, transparent 35%),
+        radial-gradient(circle at 80% 10%, #087c9b 0%, transparent 30%),
+        linear-gradient(135deg, #121027, #21153c);
+    overflow-x: hidden;
+}
+
+/* FUNDO */
+
+.bg-star {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: .5;
+    animation: starMove 5s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes starMove {
+    from {
+        transform: translateY(0);
+        opacity: .2;
+    }
+
+    to {
+        transform: translateY(-30px);
+        opacity: .8;
+    }
+}
+
+/* HEADER */
+
+header {
+    text-align: center;
+    padding: 35px 20px 25px;
+}
+
+.logo {
+    font-size: clamp(45px, 8vw, 80px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 0 0 25px rgba(255,255,255,.3);
+}
+
+.subtitle {
+    color: #ddd;
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+/* CONTAINER */
+
+.container {
+    width: min(1100px, 94%);
+    margin: auto;
+    padding-bottom: 70px;
+}
+
+/* CARDS */
+
+.card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 25px;
+    padding: 25px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+}
+
+.card h2 {
+    margin-bottom: 18px;
+}
+
+/* ESCOLHA */
+
+.pet-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.pet-option {
+    background: rgba(255,255,255,.08);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.pet-option:hover {
+    transform: translateY(-5px) scale(1.03);
+    background: rgba(255,255,255,.15);
+}
+
+.pet-option.selected {
+    border-color: #fff;
+    box-shadow: 0 0 25px rgba(255,255,255,.25);
+}
+
+.pet-option .emoji {
+    font-size: 65px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pet-option small {
+    color: #bbb;
+}
+
+/* PET */
+
+.pet-stage {
+    text-align: center;
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pet-display {
+    font-size: 150px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    transition: .25s;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.pet-display:hover {
+    transform: scale(1.08);
+}
+
+.pet-display.bounce {
+    animation: bounce .5s;
+}
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3) rotate(5deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pet-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.pet-level {
+    color: #ffd54f;
+    margin-top: 5px;
+}
+
+.pet-message {
+    margin-top: 10px;
+    color: #ddd;
+    font-style: italic;
+}
+
+/* STATUS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    background: rgba(0,0,0,.2);
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.stat-title {
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.bar {
+    width: 100%;
+    height: 15px;
+    background: rgba(0,0,0,.35);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    width: 50%;
+    transition: .4s;
+}
+
+.hunger {
+    background: #ff9f43;
+}
+
+.energy {
+    background: #35d07f;
+}
+
+.happiness {
+    background: #ff4fa3;
+}
+
+.stat-number {
+    text-align: right;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* BOTÕES */
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.action {
+    border: none;
+    color: white;
+    padding: 18px 10px;
+    border-radius: 17px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(255,255,255,.12);
+    transition: .2s;
+}
+
+.action:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.2);
+}
+
+.action:active {
+    transform: scale(.96);
+}
+
+.food {
+    border-bottom: 4px solid #ff9f43;
+}
+
+.play {
+    border-bottom: 4px solid #35d07f;
+}
+
+.sleep {
+    border-bottom: 4px solid #7c4dff;
+}
+
+.bath {
+    border-bottom: 4px solid #00c6ff;
+}
+
+.care {
+    border-bottom: 4px solid #ff4fa3;
+}
+
+/* MOEDAS */
+
+.wallet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,.2);
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+}
+
+.coins {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffd54f;
+}
+
+/* LOJA */
+
+.shop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 15px;
+}
+
+.shop-item {
+    background: rgba(0,0,0,.2);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+}
+
+.shop-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #ffd54f;
+    margin: 10px;
+}
+
+.buy {
+    background: var(--primary);
+}
+
+/* CONQUISTAS */
+
+.achievement {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: rgba(0,0,0,.18);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    opacity: .35;
+    transition: .3s;
+}
+
+.achievement.unlocked {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255,213,79,.15);
+}
+
+.achievement-icon {
+    font-size: 35px;
+}
+
+/* PETS SECRETOS */
+
+.secret-pets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.secret-pet {
+    background: rgba(0,0,0,.2);
+    border-radius: 18px;
+    text-align: center;
+    padding: 20px;
+    opacity: .4;
+}
+
+.secret-pet.unlocked {
+    opacity: 1;
+}
+
+/* NOTIFICAÇÃO */
+
+.notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #17152b;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 15px;
+    padding: 18px 22px;
+    max-width: 320px;
+    transform: translateY(150px);
+    transition: .4s;
+    z-index: 100;
+}
+
+.notification.show {
+    transform: translateY(0);
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+}
+
+.modal-content {
+    width: min(500px, 100%);
+    background: #1d1836;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 70px rgba(0,0,0,.7);
+}
+
+.modal-icon {
+    font-size: 70px;
+    margin-bottom: 15px;
+}
+
+.modal h2 {
+    margin-bottom: 10px;
+}
+
+.modal button {
+    margin-top: 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 13px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: #888;
+    padding: 30px 10px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .pet-display {
+        font-size: 110px;
+    }
+
+    .wallet {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ESTRELAS -->
+<div class="bg-star" style="left:10%;top:20%"></div>
+<div class="bg-star" style="left:30%;top:10%"></div>
+<div class="bg-star" style="left:50%;top:30%"></div>
+<div class="bg-star" style="left:70%;top:15%"></div>
+<div class="bg-star" style="left:90%;top:35%"></div>
+<div class="bg-star" style="left:20%;top:70%"></div>
+<div class="bg-star" style="left:80%;top:75%"></div>
+
+
+<header>
+
+    <div class="logo">🐾 PET WORLD</div>
+
+    <div class="subtitle">
+        Seu pet. Seu mundo. Sua responsabilidade. 💖
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <!-- ESCOLHER PET -->
+
+    <section class="card">
+
+        <h2>🐾 Escolha seu pet</h2>
+
+        <div class="pet-selection">
+
+            <div class="pet-option selected" onclick="escolherPet(0)" id="option0">
+                <span class="emoji">🐱</span>
+                <b>Gato</b>
+                <br>
+                <small>Fofo e preguiçoso</small>
+            </div>
+
+            <div class="pet-option" onclick="escolherPet(1)" id="option1">
+                <span class="emoji">🐶</span>
+                <b>Cachorro</b>
+                <br>
+                <small>Cheio de energia</small>
+            </div>
+
+            <div class="pet-option" onclick="escolherPet(2)" id="option2">
+                <span class="emoji">🐸</span>
+                <b>Sapo</b>
+                <br>
+                <small>Extremamente suspeito</small>
+            </div>
+
+            <div class="pet-option" onclick="escolherPet(3)" id="option3">
+                <span class="emoji">🐙</span>
+                <b>Polvinho</b>
+                <br>
+                <small>8 braços!</small>
+            </div>
+
+            <div class="pet-option" onclick="escolherPet(4)" id="option4">
+                <span class="emoji">🦆</span>
+                <b>Pato</b>
+                <br>
+                <small>Quá quá</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PET -->
+
+    <section class="card pet-stage">
+
+        <div
+            class="pet-display"
+            id="petDisplay"
+            onclick="fazerCarinho()">
+            🐱
+        </div>
+
+        <div class="pet-name" id="petName">
+            Seu Gatinho
+        </div>
+
+        <div class="pet-level">
+            ⭐ Nível <span id="level">1</span>
+        </div>
+
+        <div class="pet-message" id="petMessage">
+            Seu pet está esperando você!
+        </div>
+
+    </section>
+
+
+    <!-- STATUS -->
+
+    <section class="card">
+
+        <h2>📊 Status do Pet</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    🍖 Fome
+                </div>
+
+                <div class="bar">
+                    <div class="fill hunger" id="hungerBar"></div>
+                </div>
+
+                <div class="stat-number">
+                    <span id="hunger">70</span>/100
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    ⚡ Energia
+                </div>
+
+                <div class="bar">
+                    <div class="fill energy" id="energyBar"></div>
+                </div>
+
+                <div class="stat-number">
+                    <span id="energy">70</span>/100
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    ❤️ Felicidade
+                </div>
+
+                <div class="bar">
+                    <div class="fill happiness" id="happinessBar"></div>
+                </div>
+
+                <div class="stat-number">
+                    <span id="happiness">70</span>/100
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AÇÕES -->
+
+    <section class="card">
+
+        <h2>🎮 O que você quer fazer?</h2>
+
+        <div class="actions">
+
+            <button class="action food" onclick="alimentar()">
+                🍖 Alimentar
+            </button>
+
+            <button class="action play" onclick="brincar()">
+                🎾 Brincar
+            </button>
+
+            <button class="action sleep" onclick="dormir()">
+                😴 Dormir
+            </button>
+
+            <button class="action bath" onclick="banho()">
+                🛁 Dar banho
+            </button>
+
+            <button class="action care" onclick="fazerCarinho()">
+                ❤️ Carinho
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- CARTEIRA -->
+
+    <section class="card">
+
+        <div class="wallet">
+
+            <div>
+                🪙 Suas moedas
+            </div>
+
+            <div class="coins">
+                🪙 <span id="coins">100</span>
+            </div>
+
+        </div>
+
+        <p>
+            Cuide do seu pet para ganhar moedas!
+        </p>
+
+    </section>
+
+
+    <!-- LOJA -->
+
+    <section class="card">
+
+        <h2>🛍️ Loja do Pet</h2>
+
+        <div class="shop">
+
+            <div class="shop-item">
+                <div class="shop-icon">🍗</div>
+                <b>Comida Premium</b>
+                <div class="price">🪙 20</div>
+                <button class="buy" onclick="comprarComida()">
+                    Comprar
+                </button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-icon">🎾</div>
+                <b>Bola Mágica</b>
+                <div class="price">🪙 35</div>
+                <button class="buy" onclick="comprarBola()">
+                    Comprar
+                </button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-icon">👑</div>
+                <b>Coroa</b>
+                <div class="price">🪙 100</div>
+                <button class="buy" onclick="comprarCoroa()">
+                    Comprar
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONQUISTAS -->
+
+    <section class="card">
+
+        <h2>🏆 Conquistas</h2>
+
+        <div class="achievement" id="achievement1">
+
+            <div class="achievement-icon">🐾</div>
+
+            <div>
+                <b>Primeiro Pet</b>
+                <br>
+                <small>Escolha seu primeiro pet.</small>
+            </div>
+
+        </div>
+
+
+        <div class="achievement" id="achievement2">
+
+            <div class="achievement-icon">❤️</div>
+
+            <div>
+                <b>Pet Feliz</b>
+                <br>
+                <small>Chegue a 100 de felicidade.</small>
+            </div>
+
+        </div>
+
+
+        <div class="achievement" id="achievement3">
+
+            <div class="achievement-icon">🍖</div>
+
+            <div>
+                <b>Chef do Pet</b>
+                <br>
+                <small>Alimente seu pet 10 vezes.</small>
+            </div>
+
+        </div>
+
+
+        <div class="achievement" id="achievement4">
+
+            <div class="achievement-icon">⭐</div>
+
+            <div>
+                <b>Pet Experiente</b>
+                <br>
+                <small>Chegue ao nível 5.</small>
+            </div>
+
+        </div>
+
+
+        <div class="achievement" id="achievement5">
+
+            <div class="achievement-icon">🪙</div>
+
+            <div>
+                <b>Rico!</b>
+                <br>
+                <small>Tenha 500 moedas.</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PETS SECRETOS -->
+
+    <section class="card">
+
+        <h2>🔐 Pets Secretos</h2>
+
+        <p style="margin-bottom:15px;color:#bbb;">
+            Alguns pets estão escondidos...
+        </p>
+
+        <div class="secret-pets">
+
+            <div class="secret-pet" id="secret1">
+                <div style="font-size:50px;">🐲</div>
+                <b>Dragão</b>
+                <br>
+                <small>Alcance o nível 5.</small>
+            </div>
+
+            <div class="secret-pet" id="secret2">
+                <div style="font-size:50px;">🦄</div>
+                <b>Unicórnio</b>
+                <br>
+                <small>Tenha 500 moedas.</small>
+            </div>
+
+            <div class="secret-pet" id="secret3">
+                <div style="font-size:50px;">👽</div>
+                <b>Alien</b>
+                <br>
+                <small>Descubra o segredo.</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEGREDO -->
+
+    <section class="card">
+
+        <h2>👀 Área Misteriosa</h2>
+
+        <p style="color:#bbb;margin-bottom:15px;">
+            Dizem que existe um segredo escondido no PET WORLD...
+        </p>
+
+        <button onclick="segredo()">
+            🔍 Procurar segredo
+        </button>
+
+    </section>
+
+
+    <!-- RESET -->
+
+    <section class="card">
+
+        <h2>⚙️ Configurações</h2>
+
+        <button onclick="resetar()">
+            💣 Apagar progresso
+        </button>
+
+    </section>
+
+</div>
+
+
+<footer>
+
+    🐾 PET WORLD © 2026<br>
+    Cuide bem do seu pet! 💖
+
+</footer>
+
+
+<!-- NOTIFICAÇÃO -->
+
+<div class="notification" id="notification">
+    Mensagem
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-icon" id="modalIcon">
+            🎉
+        </div>
+
+        <h2 id="modalTitle">
+            Parabéns!
+        </h2>
+
+        <p id="modalText">
+            Você conseguiu alguma coisa.
+        </p>
+
+        <button onclick="fecharModal()">
+            Fechar
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   DADOS
+===================================== */
+
+const pets = [
+
+    {
+        emoji: "🐱",
+        nome: "Seu Gatinho"
+    },
+
+    {
+        emoji: "🐶",
+        nome: "Seu Cachorrinho"
+    },
+
+    {
+        emoji: "🐸",
+        nome: "Seu Sapo"
+    },
+
+    {
+        emoji: "🐙",
+        nome: "Seu Polvinho"
+    },
+
+    {
+        emoji: "🦆",
+        nome: "Seu Pato"
+    }
+
+];
+
+
+/* =====================================
+   ESTADO
+===================================== */
+
+let petAtual =
+    Number(localStorage.getItem("petAtual")) || 0;
+
+let hunger =
+    Number(localStorage.getItem("hunger")) || 70;
+
+let energy =
+    Number(localStorage.getItem("energy")) || 70;
+
+let happiness =
+    Number(localStorage.getItem("happiness")) || 70;
+
+let coins =
+    Number(localStorage.getItem("coins")) || 100;
+
+let level =
+    Number(localStorage.getItem("level")) || 1;
+
+let xp =
+    Number(localStorage.getItem("xp")) || 0;
+
+let comidas =
+    Number(localStorage.getItem("comidas")) || 0;
+
+let segredoEncontrado =
+    localStorage.getItem("segredo") === "true";
+
+
+/* =====================================
+   SALVAR
+===================================== */
+
+function salvar() {
+
+    localStorage.setItem("petAtual", petAtual);
+    localStorage.setItem("hunger", hunger);
+    localStorage.setItem("energy", energy);
+    localStorage.setItem("happiness", happiness);
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("level", level);
+    localStorage.setItem("xp", xp);
+    localStorage.setItem("comidas", comidas);
+    localStorage.setItem("segredo", segredoEncontrado);
+
+}
+
+
+/* =====================================
+   TELA
+===================================== */
+
+function atualizarTela() {
+
+    document.getElementById("petDisplay").textContent =
+        pets[petAtual].emoji;
+
+    document.getElementById("petName").textContent =
+        pets[petAtual].nome;
+
+    document.getElementById("hunger").textContent =
+        hunger;
+
+    document.getElementById("energy").textContent =
+        energy;
+
+    document.getElementById("happiness").textContent =
+        happiness;
+
+    document.getElementById("coins").textContent =
+        coins;
+
+    document.getElementById("level").textContent =
+        level;
+
+
+    document.getElementById("hungerBar").style.width =
+        hunger + "%";
+
+    document.getElementById("energyBar").style.width =
+        energy + "%";
+
+    document.getElementById("happinessBar").style.width =
+        happiness + "%";
+
+
+    for(let i = 0; i < pets.length; i++) {
+
+        document.getElementById("option" + i)
+            .classList.toggle(
+                "selected",
+                i === petAtual
+            );
+
+    }
+
+
+    atualizarHumor();
+    verificarConquistas();
+
+}
+
+
+/* =====================================
+   ESCOLHER PET
+===================================== */
+
+function escolherPet(numero) {
+
+    petAtual = numero;
+
+    mostrarMensagem(
+        "🐾 Novo amigo!",
+        "Você escolheu " + pets[numero].nome + "!"
+    );
+
+    ganharXP(5);
+
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   HUMOR
+===================================== */
+
+function atualizarHumor() {
+
+    let mensagem;
+
+    if(hunger < 20) {
+
+        mensagem =
+            "🍖 Estou morrendo de fome!";
+
+    }
+
+    else if(energy < 20) {
+
+        mensagem =
+            "😴 Estou muito cansado...";
+
+    }
+
+    else if(happiness >= 85) {
+
+        mensagem =
+            "🤩 Estou MUITO feliz!";
+
+    }
+
+    else if(happiness >= 60) {
+
+        mensagem =
+            "😊 Estou me sentindo bem!";
+
+    }
+
+    else if(happiness >= 35) {
+
+        mensagem =
+            "😐 Poderia estar melhor...";
+
+    }
+
+    else {
+
+        mensagem =
+            "😢 Estou meio triste...";
+
+    }
+
+    document.getElementById("petMessage")
+        .textContent = mensagem;
+
+}
+
+
+/* =====================================
+   LIMITAR VALORES
+===================================== */
+
+function limitar() {
+
+    hunger = Math.max(0, Math.min(100, hunger));
+
+    energy = Math.max(0, Math.min(100, energy));
+
+    happiness =
+        Math.max(0, Math.min(100, happiness));
+
+}
+
+
+/* =====================================
+   ALIMENTAR
+===================================== */
+
+function alimentar() {
+
+    hunger += 25;
+    happiness += 5;
+    energy -= 2;
+
+    moedas(8);
+    ganharXP(10);
+
+    comidas++;
+
+    if(hunger > 100)
+        hunger = 100;
+
+    petAnimacao();
+
+    mostrarNotificacao(
+        "🍖 NHAM! Seu pet comeu!"
+    );
+
+    limitar();
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   BRINCAR
+===================================== */
+
+function brincar() {
+
+    if(energy < 15) {
+
+        mostrarNotificacao(
+            "😴 Seu pet está cansado!"
+        );
+
+        return;
+    }
+
+
+    happiness += 20;
+    energy -= 18;
+    hunger -= 8;
+
+    moedas(10);
+    ganharXP(15);
+
+    petAnimacao();
+
+    mostrarNotificacao(
+        "🎾 Diversão total!"
+    );
+
+    limitar();
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   DORMIR
+===================================== */
+
+function dormir() {
+
+    energy += 35;
+    hunger -= 5;
+    happiness += 5;
+
+    moedas(5);
+    ganharXP(8);
+
+    mostrarNotificacao(
+        "😴 Zzzzz... seu pet descansou!"
+    );
+
+    limitar();
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   BANHO
+===================================== */
+
+function banho() {
+
+    happiness += 10;
+    energy -= 3;
+
+    moedas(7);
+    ganharXP(10);
+
+    mostrarNotificacao(
+        "🛁 Seu pet está limpinho!"
+    );
+
+    limitar();
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   CARINHO
+===================================== */
+
+function fazerCarinho() {
+
+    happiness += 8;
+
+    moedas(3);
+    ganharXP(5);
+
+    petAnimacao();
+
+    mostrarNotificacao(
+        "❤️ Seu pet adorou o carinho!"
+    );
+
+    limitar();
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   MOEDAS
+===================================== */
+
+function moedas(valor) {
+
+    coins += valor;
+
+}
+
+
+/* =====================================
+   XP
+===================================== */
+
+function ganharXP(valor) {
+
+    xp += valor;
+
+    let necessario =
+        level * 100;
+
+
+    if(xp >= necessario) {
+
+        xp -= necessario;
+
+        level++;
+
+        mostrarMensagem(
+            "⭐ LEVEL UP!",
+            "Seu pet chegou ao nível " + level + "!"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   ANIMAÇÃO
+===================================== */
+
+function petAnimacao() {
+
+    const pet =
+        document.getElementById("petDisplay");
+
+    pet.classList.remove("bounce");
+
+    void pet.offsetWidth;
+
+    pet.classList.add("bounce");
+
+}
+
+
+/* =====================================
+   COMPRAS
+===================================== */
+
+function comprarComida() {
+
+    if(coins < 20) {
+
+        mostrarNotificacao(
+            "❌ Você não tem moedas suficientes!"
+        );
+
+        return;
+
+    }
+
+    coins -= 20;
+
+    hunger += 45;
+
+    happiness += 10;
+
+    ganharXP(20);
+
+    limitar();
+
+    mostrarNotificacao(
+        "🍗 Comida Premium comprada!"
+    );
+
+    salvar();
+    atualizarTela();
+
+}
+
+
+function comprarBola() {
+
+    if(coins < 35) {
+
+        mostrarNotificacao(
+            "❌ Você não tem moedas suficientes!"
+        );
+
+        return;
+
+    }
+
+    coins -= 35;
+
+    happiness += 35;
+
+    energy -= 10;
+
+    ganharXP(30);
+
+    limitar();
+
+    mostrarNotificacao(
+        "🎾 Seu pet adorou a bola!"
+    );
+
+    salvar();
+    atualizarTela();
+
+}
+
+
+function comprarCoroa() {
+
+    if(coins < 100) {
+
+        mostrarNotificacao(
+            "❌ Você precisa de 100 moedas!"
+        );
+
+        return;
+
+    }
+
+    coins -= 100;
+
+    happiness = 100;
+
+    ganharXP(50);
+
+    mostrarMensagem(
+        "👑 PET REAL!",
+        "Seu pet agora se sente como um rei!"
+    );
+
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   CONQUISTAS
+===================================== */
+
+function desbloquear(id) {
+
+    document.getElementById(id)
+        .classList.add("unlocked");
+
+}
+
+
+function verificarConquistas() {
+
+    desbloquear("achievement1");
+
+
+    if(happiness >= 100) {
+
+        desbloquear("achievement2");
+
+    }
+
+
+    if(comidas >= 10) {
+
+        desbloquear("achievement3");
+
+    }
+
+
+    if(level >= 5) {
+
+        desbloquear("achievement4");
+
+        document.getElementById("secret1")
+            .classList.add("unlocked");
+
+    }
+
+
+    if(coins >= 500) {
+
+        desbloquear("achievement5");
+
+        document.getElementById("secret2")
+            .classList.add("unlocked");
+
+    }
+
+
+    if(segredoEncontrado) {
+
+        document.getElementById("secret3")
+            .classList.add("unlocked");
+
+    }
+
+}
+
+
+/* =====================================
+   SEGREDO
+===================================== */
+
+function segredo() {
+
+    if(segredoEncontrado) {
+
+        mostrarMensagem(
+            "👽 Você já encontrou!",
+            "O Alien continua observando você..."
+        );
+
+        return;
+
+    }
+
+
+    let resposta =
+        prompt(
+            "🔐 Digite a palavra secreta:"
+        );
+
+
+    if(!resposta)
+        return;
+
+
+    if(
+        resposta.toLowerCase().trim() ===
+        "pet"
+    ) {
+
+        segredoEncontrado = true;
+
+        coins += 100;
+
+        happiness = 100;
+
+        mostrarMensagem(
+            "👽 SEGREDO DESCOBERTO!",
+            "Você encontrou o Alien! +100 moedas!"
+        );
+
+        salvar();
+        atualizarTela();
+
+    }
+
+    else {
+
+        mostrarNotificacao(
+            "❌ Não é essa..."
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   NOTIFICAÇÃO
+===================================== */
+
+function mostrarNotificacao(texto) {
+
+    const n =
+        document.getElementById("notification");
+
+    n.textContent = texto;
+
+    n.classList.add("show");
+
+    setTimeout(() => {
+
+        n.classList.remove("show");
+
+    }, 2800);
+
+}
+
+
+/* =====================================
+   MODAL
+===================================== */
+
+function mostrarMensagem(titulo, texto) {
+
+    document.getElementById("modalTitle")
+        .textContent = titulo;
+
+    document.getElementById("modalText")
+        .textContent = texto;
+
+    document.getElementById("modal")
+        .style.display = "flex";
+
+}
+
+
+function fecharModal() {
+
+    document.getElementById("modal")
+        .style.display = "none";
+
+}
+
+
+/* =====================================
+   RESET
+===================================== */
+
+function resetar() {
+
+    const confirmar =
+        confirm(
+            "Tem certeza que deseja apagar todo o progresso?"
+        );
+
+    if(!confirmar)
+        return;
+
+    localStorage.clear();
+
+    petAtual = 0;
+    hunger = 70;
+    energy = 70;
+    happiness = 70;
+    coins = 100;
+    level = 1;
+    xp = 0;
+    comidas = 0;
+    segredoEncontrado = false;
+
+
+    document.querySelectorAll(".achievement")
+        .forEach(a =>
+            a.classList.remove("unlocked")
+        );
+
+
+    document.querySelectorAll(".secret-pet")
+        .forEach(a =>
+            a.classList.remove("unlocked")
+        );
+
+
+    mostrarMensagem(
+        "💥 PROGRESSO APAGADO",
+        "Seu novo começo começa agora!"
+    );
+
+
+    salvar();
+    atualizarTela();
+
+}
+
+
+/* =====================================
+   O TEMPO AFETA O PET
+===================================== */
+
+setInterval(() => {
+
+    hunger -= 1;
+
+    energy -= .3;
+
+    happiness -= .4;
+
+    hunger = Math.round(hunger);
+    energy = Math.round(energy);
+    happiness = Math.round(happiness);
+
+    limitar();
+
+    salvar();
+    atualizarTela();
+
+}, 30000);
+
+
+/* =====================================
+   INICIAR
+===================================== */
+
+salvar();
+atualizarTela();
+
+</script>
+
+</body>
+</html>
+```
